@@ -1,3 +1,5 @@
+package selenide.pages;
+
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
