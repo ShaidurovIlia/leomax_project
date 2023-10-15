@@ -1,4 +1,4 @@
-package selenide.tests;
+package selenide.core;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import selenide.pages.BaseSeleniumPage;
+import selenide.pages.BasePage;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +20,7 @@ abstract public class BaseSeleniumTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        BaseSeleniumPage.setDriver(driver);
+        BasePage.setDriver(driver);
     }
 
     @AfterAll
