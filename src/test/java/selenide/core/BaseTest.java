@@ -10,7 +10,7 @@ import selenide.pages.BasePage;
 
 import java.util.concurrent.TimeUnit;
 
-abstract public class BaseSeleniumTest {
+abstract public class BaseTest {
     protected static WebDriver driver;
 
     @BeforeAll

@@ -54,6 +54,5 @@ public class HeaderPage extends BasePage {
         element.click();
         String actualTitle = driver.getTitle();
         Assertions.assertEquals(actualTitle, expectedTitle);
-
     }
 }

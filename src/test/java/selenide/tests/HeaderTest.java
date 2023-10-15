@@ -4,47 +4,47 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import selenide.core.BaseSeleniumTest;
+import selenide.core.BaseTest;
 import selenide.pages.HeaderPage;
 
 @Owner(value = "Илья Шайдуров")
-@DisplayName("Класс HeaderSeleniumTest")
-public class HeaderSeleniumTest extends BaseSeleniumTest {
+@DisplayName("Класс HeaderTest")
+public class HeaderTest extends BaseTest {
 
-    HeaderPage mainPage = new HeaderPage();
+    HeaderPage header = new HeaderPage();
 
     @DisplayName("Акции")
     @Description("Проверяет переход на страницу страницу акции")
     @Test
     public void checkAction() {
-        mainPage.clickActions();
+        header.clickActions();
     }
 
     @DisplayName("Бренды")
     @Description("Проверяет переход на страницу бренды")
     @Test
     public void checkBrand() {
-        mainPage.clickBrands();
+        header.clickBrands();
     }
 
     @DisplayName("Лайв трансляция")
     @Description("Проверяет переход на страницу лайв трансляции")
     @Test
-    public void headerTelecast() {
-        mainPage.clickTelecast();
+    public void checkTelecast() {
+        header.clickTelecast();
     }
 
     @DisplayName("Товары из рекламы")
     @Description("Проверяет переход на страницу товары из рекламы")
     @Test
-    void headerAdvertising() {
-        mainPage.clickAdvertising();
+    void checkAdvertising() {
+        header.clickAdvertising();
     }
 
     @DisplayName("Новая коллекция")
     @Description("Проверяет переход на страницу новая коллекция")
     @Test
-    void headerNewCollection() {
-        mainPage.clickCollection();
+    void checkNewCollection() {
+        header.clickCollection();
     }
 }
