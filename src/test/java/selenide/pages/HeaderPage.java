@@ -13,11 +13,11 @@ public class HeaderPage extends BasePage {
     private static final String COLLECTION_TITLE = "Новая коллекция";
     @FindBy(css = "a.bottom-header__link[href='/action/']")
     private WebElement action;
-    @FindBy(css= "a.bottom-header__link[href='/brand/']")
+    @FindBy(css = "a.bottom-header__link[href='/brand/']")
     private WebElement brand;
     @FindBy(css = "a.bottom-header__link[href='/telecast/']")
     private WebElement telecast;
-    @FindBy(css ="a.bottom-header__link[href='/products/tovary_leomax/']")
+    @FindBy(css = "a.bottom-header__link[href='/products/tovary_leomax/']")
     private WebElement advertising;
     @FindBy(css = "a.bottom-header__link.bottom-header__link-liquidation")
     private WebElement collection;
@@ -35,7 +35,7 @@ public class HeaderPage extends BasePage {
     }
 
     public void clickBrands() {
-       checkPageTitle(brand, BRAND_TITLE);
+        checkPageTitle(brand, BRAND_TITLE);
     }
 
     public void clickTelecast() {
