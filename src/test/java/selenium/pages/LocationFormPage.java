@@ -1,9 +1,10 @@
-package selenide.pages;
+package selenium.pages;
 
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import selenium.readProperties.ConfigProvider;
 
 public class LocationFormPage extends BasePage {
 
@@ -24,12 +25,12 @@ public class LocationFormPage extends BasePage {
     private WebElement elementCity;
 
     public LocationFormPage() {
-        driver.get("https://www.leomax.ru/");
+        driver.get(ConfigProvider.URL);
         PageFactory.initElements(driver, this);
     }
 
-    public boolean isModalDisplayed() {
-        return modal.isDisplayed();
+    public void isModalDisplayed() {
+        modal.isDisplayed();
     }
 
     public void clickCitySelectionButton() {
@@ -37,6 +38,7 @@ public class LocationFormPage extends BasePage {
     }
 
     public void enterCityAndSelect() {
+        elementCity.click();
         choiceIndication.click();
         list.sendKeys(city);
         enterCity.click();

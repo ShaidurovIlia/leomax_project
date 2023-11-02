@@ -1,11 +1,11 @@
-package selenide.tests;
+package selenium.tests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import selenide.core.BaseTest;
-import selenide.pages.HeaderPage;
+import selenium.core.BaseTest;
+import selenium.pages.HeaderPage;
 
 @Owner(value = "Илья Шайдуров")
 @DisplayName("Класс HeaderTest")
@@ -46,5 +46,12 @@ public class HeaderTest extends BaseTest {
     @Test
     void checkNewCollection() {
         header.clickCollection();
+    }
+
+    @DisplayName("Товар в корзине")
+    @Description("Проверяет добавленный товар в корзине")
+    @Test
+    void checkOrderBasket() {
+        header.checkProductInBasket();
     }
 }

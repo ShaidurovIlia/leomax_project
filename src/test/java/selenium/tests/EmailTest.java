@@ -1,12 +1,12 @@
-package selenide.tests;
+package selenium.tests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import selenide.core.BaseTest;
-import selenide.pages.EmailPage;
+import selenium.core.BaseTest;
+import selenium.pages.EmailPage;
 
 @Owner(value = "Илья Шайдуров")
 @DisplayName("Класс EmailTest")

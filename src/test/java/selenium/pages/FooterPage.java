@@ -1,9 +1,10 @@
-package selenide.pages;
+package selenium.pages;
 
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import selenium.readProperties.ConfigProvider;
 
 public class FooterPage extends BasePage {
     private static final String CLOTHING_TITLE =
@@ -86,7 +87,7 @@ public class FooterPage extends BasePage {
     private WebElement mnogoBonus;
 
     public FooterPage() {
-        driver.get("https://www.leomax.ru/");
+        driver.get(ConfigProvider.URL);
         PageFactory.initElements(driver, this);
     }
 

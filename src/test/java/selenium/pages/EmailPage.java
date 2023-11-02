@@ -1,10 +1,11 @@
-package selenide.pages;
+package selenium.pages;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import selenium.readProperties.ConfigProvider;
 
 public class EmailPage extends BasePage {
 
@@ -18,7 +19,7 @@ public class EmailPage extends BasePage {
     private WebElement successMessage;
 
     public EmailPage() {
-        driver.get("https://www.leomax.ru/");
+        driver.get(ConfigProvider.URL);
         PageFactory.initElements(driver, this);
     }
 
@@ -36,6 +37,4 @@ public class EmailPage extends BasePage {
         emailInput.sendKeys(Keys.ENTER);
         return subscribeMessage.isDisplayed();
     }
-
-
 }

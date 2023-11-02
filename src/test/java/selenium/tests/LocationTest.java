@@ -1,11 +1,11 @@
-package selenide.tests;
+package selenium.tests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import selenide.core.BaseTest;
-import selenide.pages.LocationFormPage;
+import selenium.core.BaseTest;
+import selenium.pages.LocationFormPage;
 
 @Owner(value = "Илья Шайдуров")
 @DisplayName("Класс LocationTest")
