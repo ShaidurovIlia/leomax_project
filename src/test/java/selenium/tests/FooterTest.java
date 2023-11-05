@@ -4,6 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import selenium.components.FeedBackForm;
 import selenium.core.BaseTest;
 import selenium.pages.FooterPage;
 
@@ -12,86 +13,87 @@ import selenium.pages.FooterPage;
 public class FooterTest extends BaseTest {
 
     FooterPage footer = new FooterPage();
+    FeedBackForm feedBackForm = new FeedBackForm();
 
-    @DisplayName("Одежда и аксессуары")
+    @DisplayName("Одежда и аксессуары блок Каталог товаров")
     @Description("Проверяет переход на страницу одежда и аксессуары из футера")
     @Test
     public void checkClothing() {
         footer.clickClothing();
     }
 
-    @DisplayName("Красота и здоровье")
+    @DisplayName("Красота и здоровье блок Каталог товаров")
     @Description("Проверяет переход на страницу красота и здоровье из футера")
     @Test
     public void checkBeauty() {
         footer.clickBeauty();
     }
 
-    @DisplayName("Товары для дома")
+    @DisplayName("Товары для дома блок Каталог товаров")
     @Description("Проверяет переход на страницу товары для дома из футера")
     @Test
     public void checkProductHome() {
         footer.clickProductHome();
     }
 
-    @DisplayName("Товары для кухни")
+    @DisplayName("Товары для кухни блок Каталог товаров")
     @Description("Проверяет переход на страницу товары для кухни из футера")
     @Test
     public void checkProductKitchen() {
         footer.clickProductKitchen();
     }
 
-    @DisplayName("Обувь")
+    @DisplayName("Обувь блок Каталог товаров")
     @Description("Проверяет переход на страницу обувь из футера")
     @Test
     public void checkShoes() {
         footer.clickShoes();
     }
 
-    @DisplayName("Украшения")
+    @DisplayName("Украшения блок Каталог товаров")
     @Description("Проверяет переход на страницу украшения из футера")
     @Test
     public void checkDecoration() {
         footer.clickDecoration();
     }
 
-    @DisplayName("Доставка и сервисный сбор")
+    @DisplayName("Доставка и сервисный сбор блок Заказ")
     @Description("Проверяет переход на страницу доставка и сервисный сбор из футера")
     @Test
     public void checkDelivery() {
         footer.clickDelivery();
     }
 
-    @DisplayName("Оплата")
+    @DisplayName("Оплата блок Заказ")
     @Description("Проверяет переход на страницу оплата из футера")
     @Test
     public void checkPayment() {
         footer.clickPayment();
     }
 
-    @DisplayName("Возврат")
+    @DisplayName("Возврат блок Заказ")
     @Description("Проверяет переход на страницу возврат из футера")
     @Test
     public void checkRefund() {
         footer.clickRefund();
     }
 
-    @DisplayName("Помощь")
+    @DisplayName("Помощь блок Заказ")
     @Description("Проверяет переход на страницу помощь из футера")
     @Test
     public void checkHelp() {
         footer.clickHelp();
     }
 
-    @DisplayName("Правила акций")
+    @DisplayName("Правила акций блок Заказ")
     @Description("Проверяет переход на страницу правила акций из футера")
     @Test
     public void checkRules() {
         footer.clickRules();
     }
 
-    @DisplayName("Халва")
-    @Description("Проверяет переход на страницу рассрочка халва из футера")
+    @DisplayName("Рассрочка Халва блок Заказ")
+    @Description("Проверяет переход на страницу рассрочки халва из футера")
     @Test
     public void checkHalva() {
         footer.clickHalva();
@@ -118,7 +120,7 @@ public class FooterTest extends BaseTest {
         footer.clickReviews();
     }
 
-    @DisplayName("Прямой эфир")
+    @DisplayName("Прямой эфир блок LEOMAX")
     @Description("Проверяет переход на страницу прямой эфир из футера")
     @Test
     public void checkTelecast() {
@@ -132,17 +134,19 @@ public class FooterTest extends BaseTest {
         footer.clickPersonal();
     }
 
-       /*"тут должен быть тест на Обратную связь ,
-     заполнить форму"*/
+    @DisplayName("Обратная связь блок LEOMAX")
+    @Description("Проверяет заполнение формы обратная связь из футера")
+    @Test
+    public void checkForm() {
+        feedBackForm.fillingForm();
+    }
 
-
-/*  Подумать как сделать  так как переходит на новую страницу
- @DisplayName("Партнерская программа")
+    @DisplayName("Партнерская программа блок LEOMAX")
     @Description("Проверяет переход на страницу партнерская программа из футера")
     @Test
     public void checkPartner() {
         footer.clickPartner();
-    }*/
+    }
 
     @DisplayName("О канале блок Информация")
     @Description("Проверяет переход на страницу о канале из футера")
@@ -192,5 +196,4 @@ public class FooterTest extends BaseTest {
     public void checkMnogoBonus() {
         footer.clickMnogoBonus();
     }
-
 }

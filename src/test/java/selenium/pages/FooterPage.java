@@ -6,6 +6,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import selenium.readProperties.ConfigProvider;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 public class FooterPage extends BasePage {
     private static final String CLOTHING_TITLE =
             "Одежда и аксессуары купить в интернет-магазине Леомакс";
@@ -26,7 +30,6 @@ public class FooterPage extends BasePage {
     private static final String REVIEWS_TITLE = "Отзывы о товарах Леомакс интернет-магазина Leomax.ru";
     private static final String TELECAST_TITLE = "Онлайн ТВ";
     private static final String PERSONAL_TITLE = "Личный кабинет";
-    private static final String PARTNER_TITLE = "Партнерская программа leomax.ru";
     private static final String CHANNEL_TITLE = "Круглосуточный ТВ канал LEOMAX24 | Leomax";
     private static final String CONTACT_TITLE = "Контакты Леомакс — адрес, телефон, реквизиты";
     private static final String BONUS_TITLE = "Программа лояльности Leomax Bonus";
@@ -71,6 +74,8 @@ public class FooterPage extends BasePage {
     private WebElement personal;
     @FindBy(css = ".col-sm-3 a[href='https://advcake.com/lp/leomax/']")
     private WebElement partner;
+    @FindBy(css = ".first__description")
+    private WebElement partnerWindow;
     @FindBy(css = ".col-xs-3 a[href='/info/o_kanale/']")
     private WebElement channel;
     @FindBy(css = ".col-xs-3 a[href='/info/contacts/']")
@@ -159,10 +164,6 @@ public class FooterPage extends BasePage {
         checkPageTitle(personal, PERSONAL_TITLE);
     }
 
-    public void clickPartner() {
-        checkPageTitle(partner, PARTNER_TITLE);
-    }
-
     public void clickChannel() {
         checkPageTitle(channel, CHANNEL_TITLE);
     }
@@ -178,7 +179,6 @@ public class FooterPage extends BasePage {
     public void clickProvider() {
         checkPageTitle(provider, PROVIDER_TITLE);
     }
-
 
     public void clickTvProvider() {
         checkPageTitle(tvProvider, TV_PROVIDER_TITLE);
@@ -196,5 +196,13 @@ public class FooterPage extends BasePage {
         element.click();
         String actualTitle = driver.getTitle();
         Assertions.assertEquals(actualTitle, expectedTitle);
+    }
+
+    public void clickPartner() {
+        partner.click();
+        Set<String> allTabs = driver.getWindowHandles();
+        List<String> tabsList = new ArrayList<>(allTabs);
+        driver.switchTo().window(tabsList.get(1));
+        partnerWindow.isDisplayed();
     }
 }

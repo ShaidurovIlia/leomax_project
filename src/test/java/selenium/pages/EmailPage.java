@@ -10,6 +10,8 @@ import selenium.readProperties.ConfigProvider;
 public class EmailPage extends BasePage {
 
     private static final Faker faker = new Faker();
+    private final String generatedEmail = faker.internet().emailAddress();
+
     @FindBy(css = "#email")
     private WebElement emailInput;
     @FindBy(xpath = "//div[@class='modal-body' and text()='Вы уже подписаны на рассылку.']")
@@ -24,7 +26,6 @@ public class EmailPage extends BasePage {
     }
 
     public boolean subscribeWithFakerEmail() {
-        String generatedEmail = faker.internet().emailAddress();
         emailInput.click();
         emailInput.sendKeys(generatedEmail);
         emailInput.sendKeys(Keys.ENTER);
