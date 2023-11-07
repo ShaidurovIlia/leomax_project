@@ -4,12 +4,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import selenium.pages.BasePage;
 
 import java.util.concurrent.TimeUnit;
 
+@ExtendWith(TestListener.class)
 abstract public class BaseTest {
     protected static WebDriver driver;
 
@@ -25,7 +27,8 @@ abstract public class BaseTest {
 
     @AfterAll
     public static void tearDown() {
-        driver.close();
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
