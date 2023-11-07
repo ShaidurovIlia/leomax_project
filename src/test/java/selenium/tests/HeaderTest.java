@@ -17,41 +17,111 @@ public class HeaderTest extends BaseTest {
     @Description("Проверяет переход на страницу страницу акции")
     @Test
     public void checkAction() {
-        header.clickActions();
+        header.clickActionsLink();
     }
 
     @DisplayName("Бренды")
     @Description("Проверяет переход на страницу бренды")
     @Test
     public void checkBrand() {
-        header.clickBrands();
+        header.clickBrandsLink();
     }
 
     @DisplayName("Лайв трансляция")
     @Description("Проверяет переход на страницу лайв трансляции")
     @Test
     public void checkTelecast() {
-        header.clickTelecast();
+        header.clickTelecastLink();
     }
 
     @DisplayName("Товары из рекламы")
     @Description("Проверяет переход на страницу товары из рекламы")
     @Test
     void checkAdvertising() {
-        header.clickAdvertising();
+        header.clickAdvertisingLink();
     }
 
     @DisplayName("Новая коллекция")
     @Description("Проверяет переход на страницу новая коллекция")
     @Test
     void checkNewCollection() {
-        header.clickCollection();
+        header.clickCollectionLink();
     }
 
     @DisplayName("Товар в корзине")
     @Description("Проверяет добавленный товар в корзине")
     @Test
     void checkOrderBasket() {
-        header.checkProductInBasket();
+        header.searchProductAndAddToBasket();
+    }
+
+    @DisplayName("Баннер больше покупка")
+    @Description("Проверяет переход на страницу баннера большая покупка")
+    @Test
+    void checkBigSaleBanner() {
+        header.clickActionBannerLink();
+    }
+
+    @DisplayName("Баннер карта москвича")
+    @Description("Проверяет переход на страницу баннера карта москвича")
+    @Test
+    void checkMskBanner() {
+        header.clickMskCardBannerLink();
+    }
+
+    @DisplayName("Баннер Много.ру от leomax")
+    @Description("Проверяет переход на страницу баннера много.ру")
+    @Test
+    void checkMnogoRuBanner() {
+        header.clickMnogoRuBannerLink();
+    }
+
+    @DisplayName("Баннер рассрочка от leomax")
+    @Description("Проверяет  переход на страницу баннера рассрочку от leomax")
+    @Test
+    void checkPaymentBanner() {
+        header.clickPaymentBannerLink();
+    }
+
+    @DisplayName("Баннер халва")
+    @Description("Проверяет  переход на страницу баннера халва")
+    @Test
+    void checkHalvaBanner() {
+        header.clickHalvaBannerLink();
+    }
+
+    @DisplayName("Баннер приведи друга")
+    @Description("Проверяет переход на страницу баннера приведи друга")
+    @Test
+    void checkBonusBanner() {
+        header.clickBonusBannerLink();
+    }
+
+    @DisplayName("Баннер жидкая резина")
+    @Description("Проверяет переход на страницу баннера жидкая резина")
+    @Test
+    void checkRubberBanner() {
+        header.clickRubberBannerLink();
+    }
+
+    @DisplayName("Баннер товары из TV-рекламы")
+    @Description("Проверяет переход на страницу баннера товары из TV-рекламы")
+    @Test
+    void checkTvProductBanner() {
+        header.clickTvProductsBannerLink();
+    }
+
+    @DisplayName("Баннер скидка для мобильного приложения")
+    @Description("Проверяет переход на страницу баннера скидка для мобильного приложения")
+    @Test
+    void checkMobileBanner() {
+        header.clickMobileBannerLink();
+    }
+
+    @DisplayName("Баннер ликвидация в leomax")
+    @Description("Проверяет переход на страницу баннера ликвидация в leomax")
+    @Test
+    void checkLiquidationBanner() {
+        header.clickLiquidationBannerLink();
     }
 }
