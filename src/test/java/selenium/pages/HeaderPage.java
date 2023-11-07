@@ -14,6 +14,7 @@ public class HeaderPage extends BasePage {
     private static final String TELECAST_TITLE = "Онлайн ТВ";
     private static final String ADVERTISING_TITLE = "Самые продаваемые товары от Леомакс | Leomax";
     private static final String COLLECTION_TITLE = "Новая коллекция";
+    private static final String SEARCH_PRODUCT = "Игрушка-антистресс 'Котик'";
     @FindBy(css = "a.bottom-header__link[href='/action/']")
     private WebElement action;
     @FindBy(css = "a.bottom-header__link[href='/brand/']")
@@ -38,6 +39,8 @@ public class HeaderPage extends BasePage {
     private WebElement buy;
     @FindBy(css = "div.cart.dropdownBasket")
     private WebElement basket;
+    @FindBy(css = "a[href*='/goods/igrushka_antistress_kotik/'] p.basket-item__title")
+    private WebElement productInBasket;
 
     public HeaderPage() {
         driver.get(ConfigProvider.URL);
@@ -72,14 +75,13 @@ public class HeaderPage extends BasePage {
 
     public void checkProductInBasket() {
         search.click();
-        search.sendKeys("Игрушка-антистресс 'Котик'");
+        search.sendKeys(SEARCH_PRODUCT);
         search.sendKeys(Keys.ENTER);
         orderClick.click();
         orderCatPhoto.click();
         size.click();
         buy.click();
         basket.click();
-        WebElement cartItem = driver.findElement(By.cssSelector("a[href*='/goods/igrushka_antistress_kotik/'] p.basket-item__title"));
-        Assertions.assertTrue(cartItem.isDisplayed());
+        Assertions.assertTrue(productInBasket.isDisplayed());
     }
 }
