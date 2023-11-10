@@ -14,7 +14,7 @@ public class CatalogPage extends BasePage {
     private static final String HEALTHY_EATING_TITLE = "Товары для здорового питания купить в интернет-магазине Леомакс";
     private static final String TEXTILE_TITLE = "Текстиль для дома купить в интернет-магазине Леомакс";
     private static final String KITCHEN_TITLE = "Техника для кухни купить в интернет-магазине Леомакс";
-    private static final String HOME_SHOES = "Домашняя обувь купить в интернет-магазине Леомакс";
+    private static final String HOME_SHOES_TITLE = "Домашняя обувь купить в интернет-магазине Леомакс";
     private static final String BIJOUTERIE_TITLE = "Бижутерия купить в интернет-магазине Леомакс";
     private static final String LIQUIDATION_TITLE = "Ликвидация";
     @FindBy(css = "div.header .header__catalog-button")
@@ -22,7 +22,7 @@ public class CatalogPage extends BasePage {
     @FindBy(css = "a.menu-desktop__title[href='/products/jenskaya_odejda/']")
     public WebElement womenClothing;
     @FindBy(css = "li [data-section-id] a[href='/products/verkhnyaya_odezhda/']")
-    public WebElement clothCatalog;
+    public WebElement cloth;
     @FindBy(css = "a.menu-desktop__title[href='/products/mujskaya_odejda/']")
     public WebElement menClothing;
     @FindBy(css = "li[data-section-id] a[href='/products/kurtki_mujskie/']")
@@ -56,45 +56,44 @@ public class CatalogPage extends BasePage {
     @FindBy(css = "li[data-section-id] a[href='/products/obuv/action/likvidaciya/']")
     public WebElement liquidationShoes;
 
-
     public CatalogPage() {
         driver.get(ConfigProvider.URL);
         PageFactory.initElements(driver, this);
     }
 
-    public void searchWomenClothing() {
-        navigateToCategory(womenClothing, clothCatalog, CLOTHING_TITLE);
+    public void navigateToWomenClothing() {
+        navigateToCategory(womenClothing, cloth, CLOTHING_TITLE);
     }
 
-    public void searchMenClothing() {
+    public void navigateToMenClothing() {
         navigateToCategory(menClothing, menJacket, JACKET_TITLE);
     }
 
-    public void searchAccessory() {
+    public void navigateToAccessory() {
         navigateToCategory(accessory, headdress, HEADDRESS_TITLE);
     }
 
-    public void searchBeautyHealth() {
+    public void navigateToBeautyHealth() {
         navigateToCategory(beautyHealth, healthyEating, HEALTHY_EATING_TITLE);
     }
 
-    public void searchHomeProduct() {
+    public void navigateToHomeProduct() {
         navigateToCategory(homeProduct, textile, TEXTILE_TITLE);
     }
 
-    public void searchKitchenProduct() {
+    public void navigateToKitchenProduct() {
         navigateToCategory(kitchenProduct, techniqueKitchen, KITCHEN_TITLE);
     }
 
-    public void searchShoes() {
-        navigateToCategory(shoes, homeShoes, HOME_SHOES);
+    public void navigateToShoes() {
+        navigateToCategory(shoes, homeShoes, HOME_SHOES_TITLE);
     }
 
-    public void searchDecorations() {
+    public void navigateToDecorations() {
         navigateToCategory(decorations, bijouterie, BIJOUTERIE_TITLE);
     }
 
-    public void searchLiquidation() {
+    public void navigateToLiquidation() {
         navigateToCategory(liquidation, liquidationShoes, LIQUIDATION_TITLE);
     }
 

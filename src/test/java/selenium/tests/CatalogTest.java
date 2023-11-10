@@ -13,62 +13,62 @@ public class CatalogTest extends BaseTest {
     @Description("Проверяет переход на страницу верхняя одежда")
     @Test
     public void searchWomenClothing() {
-        catalogPage.searchWomenClothing();
+        catalogPage.navigateToWomenClothing();
     }
 
     @DisplayName("Каталог - мужская одежда")
     @Description("Проверяет переход на страницу мужские куртки")
     @Test
-    public void checkMenClothing() {
-        catalogPage.searchMenClothing();
+    public void searchMenClothing() {
+        catalogPage.navigateToMenClothing();
     }
 
     @DisplayName("Каталог - аксессуары")
     @Description("Проверяет переход на страницу головные уборы")
     @Test
     public void searchAccessory() {
-        catalogPage.searchAccessory();
+        catalogPage.navigateToAccessory();
     }
 
     @DisplayName("Каталог - красота и здоровье")
     @Description("Проверяет переход на страницу здоровое питание")
     @Test
     public void searchBeauty() {
-        catalogPage.searchBeautyHealth();
+        catalogPage.navigateToBeautyHealth();
     }
 
     @DisplayName("Каталог - товары для дома")
     @Description("Проверяет переход на страницу текстиль")
     @Test
     public void searchTextile() {
-        catalogPage.searchHomeProduct();
+        catalogPage.navigateToHomeProduct();
     }
 
     @DisplayName("Каталог - товары для кухни")
     @Description("Проверяет переход на страницу техника для кухни")
     @Test
     public void searchKitchenTechnique() {
-        catalogPage.searchKitchenProduct();
+        catalogPage.navigateToKitchenProduct();
     }
 
     @DisplayName("Каталог - обувь")
     @Description("Проверяет переход на страницу домашняя обувь")
     @Test
     public void searchHomeShoes() {
-        catalogPage.searchShoes();
+        catalogPage.navigateToShoes();
     }
 
     @DisplayName("Каталог - украшения")
     @Description("Проверяет переход на страницу бижутерия")
     @Test
     public void searchDecoration() {
-        catalogPage.searchDecorations();
+        catalogPage.navigateToDecorations();
     }
 
     @DisplayName("Каталог - ликвидация")
     @Description("Проверяет переход на страницу ликвидация")
     @Test
     public void searchLiquidation() {
-        catalogPage.searchLiquidation();
+        catalogPage.navigateToLiquidation();
     }
 }
