@@ -48,12 +48,6 @@ public class HeaderTest extends BaseTest {
         header.clickCollectionLink();
     }
 
-    @DisplayName("Товар в корзине")
-    @Description("Проверяет добавленный товар в корзине")
-    @Test
-    void checkOrderBasket() {
-        header.searchProductAndAddToBasket();
-    }
 
     @DisplayName("Баннер больше покупка")
     @Description("Проверяет переход на страницу баннера большая покупка")
@@ -123,5 +117,19 @@ public class HeaderTest extends BaseTest {
     @Test
     void checkLiquidationBanner() {
         header.clickLiquidationBannerLink();
+    }
+
+    @DisplayName("Баннер все по 999")
+    @Description("Проверяет переход на страницу баннера все по 999")
+    @Test
+    void checkFixPriceBanner() {
+        header.clickFixPriceBannerLink();
+    }
+
+    @DisplayName("Баннер товар выходного дня")
+    @Description("Проверяет переход на страницу баннера товар выходного дня")
+    @Test
+    void checkDayOffBanner() {
+        header.clickDayOffBannerLink();
     }
 }

@@ -1,19 +1,19 @@
 package selenium.pages;
 
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import selenium.readProperties.ConfigProvider;
 
 public class HeaderPage extends BasePage {
+    private static final String FIX_PRICE_TITLE = "Каталог товаров интернет-магазина Leomax.ru";
+    private static final String DAY_OFF_TITLE = "Ледоступы-ледоходы купить в интернет-магазине Leomax";
     private static final String ACTION_TITLE = "Акции и скидки телемагазина LEOMAX";
     private static final String BRAND_TITLE = "Бренды | Интернет-магазин LEOMAX";
     private static final String TELECAST_TITLE = "Онлайн ТВ";
     private static final String ADVERTISING_TITLE = "Самые продаваемые товары от Леомакс | Leomax";
     private static final String COLLECTION_TITLE = "Новая коллекция";
-    private static final String SEARCH_PRODUCT = "Игрушка-антистресс 'Котик'";
     private static final String BIG_SALE_BANNER = "Больше покупка = больше выгода";
     private static final String MSK_CARD_BANNER = "У вас есть карта москвича? Воспользуйтесь ей и получите скидку на заказ!";
     private static final String MNOGORU_BANNER = "Бонусная программа клуба MNOGO.RU®";
@@ -35,42 +35,34 @@ public class HeaderPage extends BasePage {
     private WebElement advertising;
     @FindBy(css = "a.bottom-header__link.bottom-header__link-liquidation")
     private WebElement collection;
-    @FindBy(css = "input.ac_input[name='q']")
-    private WebElement search;
     @FindBy(css = "div.digi-product__label [target='_blank']")
     private WebElement cat;
-    @FindBy(css = "div.digi-product__buy")
-    private WebElement orderClick;
-    @FindBy(css = "label[data-toggle='tooltip'][for='product_2848657Абисс']")
-    private WebElement orderCatPhoto;
-    @FindBy(css = "div.sizes-radio")
-    private WebElement size;
-    @FindBy(css = "div.short-good-descr__btn-group")
-    private WebElement buy;
-    @FindBy(css = "div.cart.dropdownBasket")
-    private WebElement basket;
-    @FindBy(css = "a[href*='/goods/igrushka_antistress_kotik/'] p.basket-item__title")
-    private WebElement productInBasket;
-    @FindBy(css = ".action-list__elem:nth-child(1)")
+    @FindBy(css = "a[href='/action/cpa_kaskad_2023-11']")
     private WebElement bigSale;
-    @FindBy(css = ".action-list__elem:nth-child(2)")
+    @FindBy(css = "a[href='/action/karta-moskvicha/']")
     private WebElement mskCard;
-    @FindBy(css = ".action-list__elem:nth-child(3)")
+    @FindBy(css = "a[href='/action/mnogoru']")
     private WebElement mnogoRu;
-    @FindBy(css = ".action-list__elem:nth-child(4)")
+    @FindBy(css = "li[data-action-type='Акции leomax'] a[href='/info/oplata/#installmentpayment']")
     private WebElement payment;
-    @FindBy(css = ".action-list__elem:nth-child(5)")
+    @FindBy(css = "a[href='/action/halvacard']")
     private WebElement halva;
-    @FindBy(css = ".action-list__elem:nth-child(6)")
+    @FindBy(css = "li[data-action-type='Акции leomax'] a[href='/info/leomax_bonus/']")
     private WebElement bonus;
-    @FindBy(css = ".action-list__elem:nth-child(7)")
+    @FindBy(css = "a[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/']")
     private WebElement rubberBanner;
-    @FindBy(css = ".action-list__elem:nth-child(8)")
+    @FindBy(css = "a[href='/action/tovary_iz_tv_reklamy/']")
     private WebElement tvProductsBanner;
-    @FindBy(css = ".action-list__elem:nth-child(9)")
+    @FindBy(css = "a[href='/action/mobilnoe_prilozhenie_leomax']")
     private WebElement mobileBanner;
-    @FindBy(css = ".action-list__elem:nth-child(10)")
+    @FindBy(css = "li[data-action-type='Акции leomax'] a[href='/action/likvidaciya/']")
     private WebElement liquidationBanner;
+    @FindBy(css = ".col-xs-10 .brand-row__item-name")
+    private WebElement liquidationBannerInput;
+    @FindBy(css = "a[href='/action/vsyee_po_999/']")
+    private WebElement fixPrice;
+    @FindBy(css = "a[href='/goods/ledostupy_ledokhody/']")
+    private WebElement dayOff;
     @FindBy(css = "div.col-xs-10 h1.brand-row__item-name")
     private WebElement rubber;
 
@@ -97,18 +89,6 @@ public class HeaderPage extends BasePage {
 
     public void clickCollectionLink() {
         checkPageTitle(collection, COLLECTION_TITLE);
-    }
-
-    public void searchProductAndAddToBasket() {
-        search.click();
-        search.sendKeys(SEARCH_PRODUCT);
-        search.sendKeys(Keys.ENTER);
-        orderClick.click();
-        orderCatPhoto.click();
-        size.click();
-        buy.click();
-        basket.click();
-        Assertions.assertTrue(productInBasket.isDisplayed());
     }
 
     public void clickActionBannerLink() {
@@ -160,6 +140,16 @@ public class HeaderPage extends BasePage {
     public void clickLiquidationBannerLink() {
         action.click();
         checkPageTitle(liquidationBanner, LIQUIDATION_BANNER);
+    }
+
+    public void clickFixPriceBannerLink() {
+        action.click();
+        checkPageTitle(fixPrice, FIX_PRICE_TITLE);
+    }
+
+    public void clickDayOffBannerLink() {
+        action.click();
+        checkPageTitle(dayOff, DAY_OFF_TITLE);
     }
 
     private void checkPageTitle(WebElement element, String expectedTitle) {
