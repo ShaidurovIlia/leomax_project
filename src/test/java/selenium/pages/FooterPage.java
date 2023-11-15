@@ -27,7 +27,6 @@ public class FooterPage extends BasePage {
     private static final String HALVA_TITLE = "Халва";
     private static final String ACTION_TITLE = "Акции и скидки телемагазина LEOMAX";
     private static final String BRAND_TITLE = "Бренды | Интернет-магазин LEOMAX";
-    private static final String REVIEWS_TITLE = "Отзывы о товарах Леомакс интернет-магазина Leomax.ru";
     private static final String TELECAST_TITLE = "Онлайн ТВ";
     private static final String PERSONAL_TITLE = "Личный кабинет";
     private static final String CHANNEL_TITLE = "Круглосуточный ТВ канал LEOMAX24 | Leomax";
@@ -66,8 +65,6 @@ public class FooterPage extends BasePage {
     private WebElement action;
     @FindBy(css = ".col-sm-3 a[href='/brand/']")
     private WebElement brand;
-    @FindBy(css = ".col-sm-3 a[href='/reviews/']")
-    private WebElement reviews;
     @FindBy(css = ".col-sm-3 a[href='/telecast/']")
     private WebElement telecast;
     @FindBy(css = ".col-sm-3 a[href='/personal/']")
@@ -150,10 +147,6 @@ public class FooterPage extends BasePage {
 
     public void clickBrand() {
         checkPageTitle(brand, BRAND_TITLE);
-    }
-
-    public void clickReviews() {
-        checkPageTitle(reviews, REVIEWS_TITLE);
     }
 
     public void clickTelecast() {

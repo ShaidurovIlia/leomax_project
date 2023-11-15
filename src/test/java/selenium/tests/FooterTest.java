@@ -113,13 +113,6 @@ public class FooterTest extends BaseTest {
         footer.clickBrand();
     }
 
-    @DisplayName("Отзывы о товарах блок LEOMAX")
-    @Description("Проверяет переход на страницу отзывы о товарах из футера")
-    @Test
-    public void checkReviews() {
-        footer.clickReviews();
-    }
-
     @DisplayName("Прямой эфир блок LEOMAX")
     @Description("Проверяет переход на страницу прямой эфир из футера")
     @Test
