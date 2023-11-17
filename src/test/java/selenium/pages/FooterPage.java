@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class FooterPage extends BasePage {
     private static final String CLOTHING_TITLE =
-            "Одежда и аксессуары купить в интернет-магазине Леомакс";
+            "Аксессуары низкие цены, купить в интернет-магазине Leomax.ru | Телеканал Leomax24";
     private static final String BEAUTY_TITLE =
             "Купить товары для красоты и здоровья в интернет-магазине Леомакс";
     private static final String PRODUCT_HOME_TITLE = "Товары для дома купить в интернет-магазине Леомакс";
@@ -37,7 +37,7 @@ public class FooterPage extends BasePage {
     private static final String WEBSITE_TITLE = "Информация по объединению сайтов группы Leomax";
     private static final String MNOGO_BONUS_TITLE = "Бонусная программа клуба MNOGO.RU®";
 
-    @FindBy(css = "a[href='/products/odejda_i_aksessuary/']")
+    @FindBy(css = ".col-xs-3 a[href='/products/aksessuary/']")
     private WebElement clothing;
     @FindBy(css = ".col-xs-3 a[href='/products/krasota_i_zdorove/']")
     private WebElement beauty;
