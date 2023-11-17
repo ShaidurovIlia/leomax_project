@@ -16,7 +16,7 @@ public class CatalogPage extends BasePage {
     private static final String KITCHEN_TITLE = "Техника для кухни купить в интернет-магазине Леомакс";
     private static final String HOME_SHOES_TITLE = "Домашняя обувь купить в интернет-магазине Леомакс";
     private static final String BIJOUTERIE_TITLE = "Бижутерия купить в интернет-магазине Леомакс";
-    private static final String LIQUIDATION_TITLE = "Ликвидация";
+    private static final String LIQUIDATION_TITLE = "Ликвидация товаров интернет-магазина Леомакс";
     @FindBy(css = "div.header .header__catalog-button")
     public WebElement catalog;
     @FindBy(css = "a.menu-desktop__title[href='/products/jenskaya_odejda/']")
@@ -94,7 +94,9 @@ public class CatalogPage extends BasePage {
     }
 
     public void navigateToLiquidation() {
-        navigateToCategory(liquidation, liquidationShoes, LIQUIDATION_TITLE);
+        catalog.click();
+        liquidation.click();
+        checkPageTitle(LIQUIDATION_TITLE);
     }
 
     private void navigateToCategory(WebElement categoryElement, WebElement nextElement, String expectedTitle) {
