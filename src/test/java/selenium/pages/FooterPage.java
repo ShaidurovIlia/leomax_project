@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Set;
 
 public class FooterPage extends BasePage {
+    private static final String WOMEN_CLOTHING_TITLE = "Одежда больших размеров для полных женщин купить в Leomax.ru";
+    private static final String MEN_CLOTHING_TITLE = "Купить мужскую одежду в интернет-магазине Леомакс";
     private static final String CLOTHING_TITLE =
             "Аксессуары низкие цены, купить в интернет-магазине Leomax.ru | Телеканал Leomax24";
     private static final String BEAUTY_TITLE =
@@ -36,7 +38,14 @@ public class FooterPage extends BasePage {
     private static final String TV_PROVIDER_TITLE = "Информация для ТВ-провайдеров | Leomax";
     private static final String WEBSITE_TITLE = "Информация по объединению сайтов группы Leomax";
     private static final String MNOGO_BONUS_TITLE = "Бонусная программа клуба MNOGO.RU®";
+    private static final String USER_AGREEMENT_TITLE = "Договор на оказание информационных услуг | Leomax";
+    private static final String PROCESSING_POLICY_TITLE = "Положение об обработке персональных данных | Leomax";
+    private static final String CONSENT_PROCESSING_TITLE = "Согласие на обработку персональных данных | Leomax";
 
+    @FindBy(css = ".col-xs-3 a[href='/products/jenskaya_odejda/']")
+    private WebElement womenClothing;
+    @FindBy(css = ".col-xs-3 [href='/products/mujskaya_odejda/']")
+    private WebElement menClothing;
     @FindBy(css = ".col-xs-3 a[href='/products/aksessuary/']")
     private WebElement clothing;
     @FindBy(css = ".col-xs-3 a[href='/products/krasota_i_zdorove/']")
@@ -87,10 +96,24 @@ public class FooterPage extends BasePage {
     private WebElement website;
     @FindBy(css = ".col-xs-3 a[href='/action/mnogoru/']")
     private WebElement mnogoBonus;
+    @FindBy(css = ".col-xs-12 [href='/info/soglashenie/']")
+    private WebElement userAgreement;
+    @FindBy(css = ".col-xs-12 [href='/info/politika_obrabotki_personalnykh_dannykh/']")
+    private WebElement processingPolicy;
+    @FindBy(css = ".col-xs-12 [href='/info/soglasie_na_obrabotku_personalnykh_dannykh/']")
+    private WebElement consentProcessing;
 
     public FooterPage() {
         driver.get(ConfigProvider.URL);
         PageFactory.initElements(driver, this);
+    }
+
+    public void clickWomenClothing() {
+        checkPageTitle(womenClothing, WOMEN_CLOTHING_TITLE);
+    }
+
+    public void clickMenCloth() {
+        checkPageTitle(menClothing, MEN_CLOTHING_TITLE);
     }
 
     public void clickClothing() {
@@ -183,6 +206,18 @@ public class FooterPage extends BasePage {
 
     public void clickMnogoBonus() {
         checkPageTitle(mnogoBonus, MNOGO_BONUS_TITLE);
+    }
+
+    public void clickUserAgreement() {
+        checkPageTitle(userAgreement, USER_AGREEMENT_TITLE);
+    }
+
+    public void clickProcessingPolicy() {
+        checkPageTitle(processingPolicy, PROCESSING_POLICY_TITLE);
+    }
+
+    public void clickConsentProcessing() {
+        checkPageTitle(consentProcessing, CONSENT_PROCESSING_TITLE);
     }
 
     private void checkPageTitle(WebElement element, String expectedTitle) {

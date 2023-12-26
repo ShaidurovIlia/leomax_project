@@ -15,7 +15,21 @@ public class FooterTest extends BaseTest {
     FooterPage footer = new FooterPage();
     FeedBackForm feedBackForm = new FeedBackForm();
 
-    @DisplayName("Одежда и аксессуары блок Каталог товаров")
+    @DisplayName("Женская одежда блок Каталог товаров")
+    @Description("Проверяет переход на страницу женская одежда из футера")
+    @Test
+    public void checkWomenCloth() {
+        footer.clickWomenClothing();
+    }
+
+    @DisplayName("Мужская одежда блок Каталог товаров")
+    @Description("Проверяет переход на страницу мужская одежда из футера")
+    @Test
+    public void checkMenCloth() {
+        footer.clickMenCloth();
+    }
+
+    @DisplayName("Аксессуары блок Каталог товаров")
     @Description("Проверяет переход на страницу одежда и аксессуары из футера")
     @Test
     public void checkClothing() {
@@ -188,5 +202,26 @@ public class FooterTest extends BaseTest {
     @Test
     public void checkMnogoBonus() {
         footer.clickMnogoBonus();
+    }
+
+    @DisplayName("Пользовательское соглашение")
+    @Description("Проверяет переход на страницу пользовательское соглашение из футера")
+    @Test
+    public void checkUserAgreement() {
+        footer.clickUserAgreement();
+    }
+
+    @DisplayName("Политика обработки персональных данных")
+    @Description("Проверяет переход на страницу политика обработки персональных данных из футера")
+    @Test
+    public void checkProcessingPolicy() {
+        footer.clickProcessingPolicy();
+    }
+
+    @DisplayName("Согласие на обработку персональных данных")
+    @Description("Проверяет переход на страницу согласие на обработку персональных данных из футера")
+    @Test
+    public void clickConsentProcessing() {
+        footer.clickConsentProcessing();
     }
 }
