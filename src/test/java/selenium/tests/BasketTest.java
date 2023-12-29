@@ -73,7 +73,6 @@ public class BasketTest extends BaseTest {
         basketPage.mnogoRuCardInBasket();
     }
 
-<<<<<<< HEAD
  /* Доработать тест на проверку сообщения
 
   @DisplayName("Ограничение количества товаров")
@@ -85,8 +84,4 @@ public class BasketTest extends BaseTest {
     void checkMaxProduct() {
         basketPage.maxQuantityProductInBasket();
     }*/
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/master

@@ -111,15 +111,12 @@ public class BasketPage extends BasePage {
         promoMessage.sendKeys(WRONG_PROMO + Keys.RETURN);
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(100));
-<<<<<<< HEAD
         wait.until(ExpectedConditions.visibilityOf(wrongPromoTitle));
 
         Assertions.assertTrue(wrongPromoTitle.isDisplayed());
-=======
         wait.until(ExpectedConditions.visibilityOf(wrongMscTitle));
 
         Assertions.assertTrue(wrongMscTitle.isDisplayed());
->>>>>>> origin/master
     }
 
     public void fastOrderInBasket() {
@@ -189,18 +186,10 @@ public class BasketPage extends BasePage {
             wait.until(ExpectedConditions.visibilityOf(quantity));
             quantity.click();
             quantity.sendKeys("16", Keys.RETURN);
-<<<<<<< HEAD
             wait.until(ExpectedConditions.visibilityOf(alert));
             Assertions.assertTrue(alert.isDisplayed());
         }*/
 
-=======
-
-            wait.until(ExpectedConditions.visibilityOf(alert));
-
-            Assertions.assertTrue(alert.isDisplayed());
-        }*/
->>>>>>> origin/master
     @Step
     public void addToBasket() {
         search.click();
