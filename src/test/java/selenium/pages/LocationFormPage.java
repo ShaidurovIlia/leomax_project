@@ -45,8 +45,4 @@ public class LocationFormPage extends BasePage {
         choice.click();
         Assertions.assertTrue(elementCity.isDisplayed());
     }
-
-    public void closeModal() {
-        consent.click();
-    }
 }

@@ -99,6 +99,7 @@ public class CatalogPage extends BasePage {
         checkPageTitle(LIQUIDATION_TITLE);
     }
 
+
     private void navigateToCategory(WebElement categoryElement, WebElement nextElement, String expectedTitle) {
         catalog.click();
         categoryElement.click();
