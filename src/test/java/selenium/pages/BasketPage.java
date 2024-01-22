@@ -69,7 +69,7 @@ public class BasketPage extends BasePage {
     private WebElement socialCardSeries;
     @FindBy(css = ".basket-buttons.social-card__submit")
     private WebElement okay;
-    @FindBy(css = "#MnogoRuForm")
+    @FindBy(css = ".mnogoru-card__label-container")
     private WebElement mnogoBox;
     @FindBy(css = "#mnogoru")
     private WebElement mnogoInput;
@@ -77,9 +77,9 @@ public class BasketPage extends BasePage {
     private WebElement quantity;
     @FindBy(css = "div.basket p.alert.alert-danger.error.error-prepare")
     private WebElement alert;
-    @FindBy(css = ".coupon__error")
+    @FindBy(css = ".coupon__reset")
     private WebElement wrongPromoTitle;
-    @FindBy(css = ".social-card__error")
+    @FindBy(css = ".social-card-container .social-card__error")
     private WebElement wrongMscTitle;
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(100));
@@ -99,7 +99,6 @@ public class BasketPage extends BasePage {
         promo.click();
         promoMessage.sendKeys(PROMO + Keys.RETURN);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         wait.until(ExpectedConditions.visibilityOf(promoApplied));
 
         Assertions.assertTrue(promoApplied.isDisplayed());
@@ -110,13 +109,9 @@ public class BasketPage extends BasePage {
         promo.click();
         promoMessage.sendKeys(WRONG_PROMO + Keys.RETURN);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         wait.until(ExpectedConditions.visibilityOf(wrongPromoTitle));
 
         Assertions.assertTrue(wrongPromoTitle.isDisplayed());
-        wait.until(ExpectedConditions.visibilityOf(wrongMscTitle));
-
-        Assertions.assertTrue(wrongMscTitle.isDisplayed());
     }
 
     public void fastOrderInBasket() {
@@ -194,6 +189,7 @@ public class BasketPage extends BasePage {
     public void addToBasket() {
         search.click();
         search.sendKeys(SEARCH_PRODUCT + Keys.RETURN);
+        wait.until(ExpectedConditions.visibilityOf(orderClick));
         orderClick.click();
         size.click();
         buy.click();

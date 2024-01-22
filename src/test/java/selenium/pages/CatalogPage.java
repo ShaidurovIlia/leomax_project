@@ -53,8 +53,6 @@ public class CatalogPage extends BasePage {
     public WebElement bijouterie;
     @FindBy(css = "a.menu-desktop__title[href='/action/likvidaciya/']")
     public WebElement liquidation;
-    @FindBy(css = "li[data-section-id] a[href='/products/obuv/action/likvidaciya/']")
-    public WebElement liquidationShoes;
 
     public CatalogPage() {
         driver.get(ConfigProvider.URL);
@@ -98,7 +96,6 @@ public class CatalogPage extends BasePage {
         liquidation.click();
         checkPageTitle(LIQUIDATION_TITLE);
     }
-
 
     private void navigateToCategory(WebElement categoryElement, WebElement nextElement, String expectedTitle) {
         catalog.click();

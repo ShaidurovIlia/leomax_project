@@ -11,15 +11,20 @@ import java.util.List;
 import java.util.Set;
 
 public class FooterPage extends BasePage {
-    private static final String WOMEN_CLOTHING_TITLE = "Одежда больших размеров для полных женщин купить в Leomax.ru";
-    private static final String MEN_CLOTHING_TITLE = "Купить мужскую одежду в интернет-магазине Леомакс";
+    private static final String WOMEN_CLOTHING_TITLE =
+            "Одежда больших размеров для полных женщин купить в Leomax.ru";
+    private static final String MEN_CLOTHING_TITLE =
+            "Купить мужскую одежду в интернет-магазине Леомакс";
     private static final String CLOTHING_TITLE =
             "Аксессуары низкие цены, купить в интернет-магазине Leomax.ru | Телеканал Leomax24";
     private static final String BEAUTY_TITLE =
             "Купить товары для красоты и здоровья в интернет-магазине Леомакс";
-    private static final String PRODUCT_HOME_TITLE = "Товары для дома купить в интернет-магазине Леомакс";
-    private static final String PRODUCT_KITCHEN_TITLE = "Товары для кухни купить в интернет-магазине Леомакс";
-    private static final String SHOES_TITLE = "Купить недорогую обувь в интернет-магазине Леомакс";
+    private static final String PRODUCT_HOME_TITLE =
+            "Товары для дома купить в интернет-магазине Леомакс";
+    private static final String PRODUCT_KITCHEN_TITLE =
+            "Товары для кухни купить в интернет-магазине Леомакс";
+    private static final String SHOES_TITLE =
+            "Купить недорогую обувь в интернет-магазине Леомакс";
     private static final String DECORATING_TITLE = "Купить ювелирные украшения в интернет-магазине Леомакс";
     private static final String DELIVERY_TITLE = "Доставка и сервисный сбор";
     private static final String PAYMENT_TITLE = "Способы оплаты товаров | Leomax";

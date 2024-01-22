@@ -48,7 +48,6 @@ public class HeaderTest extends BaseTest {
         header.clickCollectionLink();
     }
 
-
     @DisplayName("Баннер больше покупка")
     @Description("Проверяет переход на страницу баннера большая покупка")
     @Test

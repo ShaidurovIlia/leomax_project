@@ -1,11 +1,14 @@
 package selenium.tests;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import selenium.core.BaseTest;
 import selenium.pages.BasketPage;
 
+@Owner(value = "Илья Шайдуров")
+@DisplayName("Класс BasketTest")
 public class BasketTest extends BaseTest {
 
     BasketPage basketPage = new BasketPage();
@@ -73,7 +76,8 @@ public class BasketTest extends BaseTest {
         basketPage.mnogoRuCardInBasket();
     }
 
- /* Доработать тест на проверку сообщения
+
+    /* Доработать тест на проверку сообщения
 
   @DisplayName("Ограничение количества товаров")
 =======
