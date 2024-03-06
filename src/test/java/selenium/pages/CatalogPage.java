@@ -8,21 +8,25 @@ import selenium.readProperties.ConfigProvider;
 
 public class CatalogPage extends BasePage {
 
-    private static final String CLOTHING_TITLE = "Купить верхнюю одежду в интернет-магазине Леомакс";
+    private static final String OUTERWEAR_TITLE = "Купить верхнюю одежду в интернет-магазине Леомакс";
     private static final String JACKET_TITLE = "Мужские куртки купить от руб в интернет-магазине Леомакс";
     private static final String HEADDRESS_TITLE = "Головные уборы купить недорого в интернет-магазине Леомакс";
     private static final String HEALTHY_EATING_TITLE = "Товары для здорового питания купить в интернет-магазине Леомакс";
-    private static final String TEXTILE_TITLE = "Текстиль для дома купить в интернет-магазине Леомакс";
-    private static final String KITCHEN_TITLE = "Техника для кухни купить в интернет-магазине Леомакс";
+    private static final String BATHROOM_TITLE = "Купить все для ванной комнаты в интернет-магазине Леомакс";
+    private static final String COOKING_TITLE = "Посуда для приготовления купить в интернет-магазине Леомакс";
     private static final String HOME_SHOES_TITLE = "Домашняя обувь купить в интернет-магазине Леомакс";
     private static final String BIJOUTERIE_TITLE = "Бижутерия купить в интернет-магазине Леомакс";
     private static final String LIQUIDATION_TITLE = "Ликвидация товаров интернет-магазина Леомакс";
+    private static final String WINDBREAKERS_TITLE = "Ветровки женские купить в интернет-магазине Леомакс — цены от руб";
+
     @FindBy(css = "div.header .header__catalog-button")
     public WebElement catalog;
     @FindBy(css = "a.menu-desktop__title[href='/products/jenskaya_odejda/']")
     public WebElement womenClothing;
     @FindBy(css = "li [data-section-id] a[href='/products/verkhnyaya_odezhda/']")
-    public WebElement cloth;
+    public WebElement outerwear;
+    @FindBy(css = "li [data-section-id] a[href='/products/vetrovki_jenskie/']")
+    public WebElement windbreakers;
     @FindBy(css = "a.menu-desktop__title[href='/products/mujskaya_odejda/']")
     public WebElement menClothing;
     @FindBy(css = "li[data-section-id] a[href='/products/kurtki_mujskie/']")
@@ -37,12 +41,12 @@ public class CatalogPage extends BasePage {
     public WebElement healthyEating;
     @FindBy(css = "a.menu-desktop__title[href='/products/tovary_dlya_doma_dachi_i_otdyha/']")
     public WebElement homeProduct;
-    @FindBy(css = "li [data-section-id] a[href='/products/tekstil/']")
-    public WebElement textile;
+    @FindBy(css = "li [data-section-id] [href='/products/vannaya_komnata/']")
+    public WebElement bathroom;
     @FindBy(css = "a.menu-desktop__title[href='/products/tovary_dlya_kuhni/']")
     public WebElement kitchenProduct;
-    @FindBy(css = "li [data-section-id] a[href='/products/tehnika_dlya_kuhni/']")
-    public WebElement techniqueKitchen;
+    @FindBy(css = "li [data-section-id] [href='/products/posuda_dlya_prigotovleniya/']")
+    public WebElement cookingUtensils;
     @FindBy(css = "a.menu-desktop__title[href='/products/obuv/']")
     public WebElement shoes;
     @FindBy(css = "li[data-section-id] a[href='/products/domashnyaya_obuv/']")
@@ -60,7 +64,12 @@ public class CatalogPage extends BasePage {
     }
 
     public void navigateToWomenClothing() {
-        navigateToCategory(womenClothing, cloth, CLOTHING_TITLE);
+        navigateToCategory(womenClothing, outerwear, OUTERWEAR_TITLE);
+    }
+
+    public void navigateToThreeLevel() {
+        catalog.click();
+        navigateToThreeLevel(womenClothing, outerwear, windbreakers, WINDBREAKERS_TITLE);
     }
 
     public void navigateToMenClothing() {
@@ -76,11 +85,11 @@ public class CatalogPage extends BasePage {
     }
 
     public void navigateToHomeProduct() {
-        navigateToCategory(homeProduct, textile, TEXTILE_TITLE);
+        navigateToCategory(homeProduct, bathroom, BATHROOM_TITLE);
     }
 
     public void navigateToKitchenProduct() {
-        navigateToCategory(kitchenProduct, techniqueKitchen, KITCHEN_TITLE);
+        navigateToCategory(kitchenProduct, cookingUtensils, COOKING_TITLE);
     }
 
     public void navigateToShoes() {
@@ -91,21 +100,29 @@ public class CatalogPage extends BasePage {
         navigateToCategory(decorations, bijouterie, BIJOUTERIE_TITLE);
     }
 
+    private void checkPageTitle(String expectedTitle) {
+        String actualTitle = driver.getTitle();
+        Assertions.assertEquals(actualTitle, expectedTitle);
+    }
+
+    private void navigateToCategory(WebElement firstLevel, WebElement secondLevel, String expectedTitle) {
+        catalog.click();
+        firstLevel.click();
+        secondLevel.click();
+        checkPageTitle(expectedTitle);
+    }
+
     public void navigateToLiquidation() {
         catalog.click();
         liquidation.click();
         checkPageTitle(LIQUIDATION_TITLE);
     }
 
-    private void navigateToCategory(WebElement categoryElement, WebElement nextElement, String expectedTitle) {
-        catalog.click();
-        categoryElement.click();
-        nextElement.click();
+    public void navigateToThreeLevel(WebElement firstLevel, WebElement secondLevel,
+                                     WebElement threeLevel, String expectedTitle) {
+        firstLevel.click();
+        secondLevel.click();
+        threeLevel.click();
         checkPageTitle(expectedTitle);
-    }
-
-    private void checkPageTitle(String expectedTitle) {
-        String actualTitle = driver.getTitle();
-        Assertions.assertEquals(actualTitle, expectedTitle);
     }
 }
