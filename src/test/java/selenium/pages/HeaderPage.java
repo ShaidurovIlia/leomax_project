@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import selenium.readProperties.ConfigProvider;
 
 public class HeaderPage extends BasePage {
+
     private static final String FIX_PRICE_TITLE = "Каталог товаров интернет-магазина Leomax.ru";
     private static final String DAY_OFF_TITLE = "Ледоступы-ледоходы купить в интернет-магазине Leomax";
     private static final String ACTION_TITLE = "Акции и скидки телемагазина LEOMAX";
@@ -14,6 +15,7 @@ public class HeaderPage extends BasePage {
     private static final String TELECAST_TITLE = "Онлайн ТВ";
     private static final String ADVERTISING_TITLE = "Самые продаваемые товары от Леомакс | Leomax";
     private static final String COLLECTION_TITLE = "Новая коллекция";
+    private static final String IDEA_TITLE = "Готовимся к праздникам. Подарки для любимых";
     private static final String BIG_SALE_BANNER = "Больше покупка = больше выгода";
     private static final String MSK_CARD_BANNER = "У вас есть карта москвича? Воспользуйтесь ей и получите скидку на заказ!";
     private static final String MNOGORU_BANNER = "Бонусная программа клуба MNOGO.RU®";
@@ -23,6 +25,7 @@ public class HeaderPage extends BasePage {
     private static final String TV_PRODUCTS_BANNER = "Товары из TV-рекламы";
     private static final String MOBILE_BANNER = "Мобильное приложение Leomax";
     private static final String LIQUIDATION_BANNER = "Ликвидация товаров интернет-магазина Леомакс";
+    private final String city = "Саратов";
     @FindBy(css = "a.bottom-header__link[href='/action/']")
     private WebElement action;
     @FindBy(css = ".action-title")
@@ -35,6 +38,8 @@ public class HeaderPage extends BasePage {
     private WebElement advertising;
     @FindBy(css = "a.bottom-header__link.bottom-header__link-liquidation")
     private WebElement collection;
+    @FindBy(css = "a.bottom-header__link.bottom-header__link-ideas")
+    private WebElement idea;
     @FindBy(css = "div.digi-product__label [target='_blank']")
     private WebElement cat;
     @FindBy(css = "a[href='/action/cpa_kaskad_2023-11']")
@@ -65,10 +70,26 @@ public class HeaderPage extends BasePage {
     private WebElement dayOff;
     @FindBy(css = "div.col-xs-10 h1.brand-row__item-name")
     private WebElement rubber;
+    @FindBy(css = "#KLADR_CITY")
+    private WebElement list;
+    @FindBy(css = ".choose-your-city__button")
+    private WebElement choice;
+    @FindBy(xpath = "//div[@id='hints-field']//div[contains(text(), 'Саратовская обл, Саратов г')]")
+    private WebElement enterCity;
+    @FindBy(css = ".top-contacts-header__city")
+    private WebElement elementCity;
+    @FindBy(css = ".modal-city-selection__button_indication")
+    private WebElement choiceIndication;
 
     public HeaderPage() {
         driver.get(ConfigProvider.URL);
         PageFactory.initElements(driver, this);
+    }
+
+    private void checkPageTitle(WebElement element, String expectedTitle) {
+        element.click();
+        String actualTitle = driver.getTitle();
+        Assertions.assertEquals(actualTitle, expectedTitle);
     }
 
     public void clickActionsLink() {
@@ -91,9 +112,8 @@ public class HeaderPage extends BasePage {
         checkPageTitle(collection, COLLECTION_TITLE);
     }
 
-    public void clickActionBannerLink() {
-        action.click();
-        checkPageTitle(bigSale, BIG_SALE_BANNER);
+    public void clickIdeaForPresent() {
+        checkPageTitle(idea, IDEA_TITLE);
     }
 
     public void clickMskCardBannerLink() {
@@ -121,20 +141,24 @@ public class HeaderPage extends BasePage {
         checkPageTitle(bonus, BONUS_BANNER);
     }
 
+    public void clickMobileBannerLink() {
+        action.click();
+        checkPageTitle(mobileBanner, MOBILE_BANNER);
+    }
+
     public void clickRubberBannerLink() {
         action.click();
         rubberBanner.click();
         rubber.isDisplayed();
     }
 
-    public void clickTvProductsBannerLink() {
-        action.click();
-        checkPageTitle(tvProductsBanner, TV_PRODUCTS_BANNER);
-    }
-
-    public void clickMobileBannerLink() {
-        action.click();
-        checkPageTitle(mobileBanner, MOBILE_BANNER);
+    public void enterCityAndSelect() {
+        elementCity.click();
+        choiceIndication.click();
+        list.sendKeys(city);
+        enterCity.click();
+        choice.click();
+        Assertions.assertTrue(elementCity.isDisplayed());
     }
 
     public void clickLiquidationBannerLink() {
@@ -152,9 +176,13 @@ public class HeaderPage extends BasePage {
         checkPageTitle(dayOff, DAY_OFF_TITLE);
     }
 
-    private void checkPageTitle(WebElement element, String expectedTitle) {
-        element.click();
-        String actualTitle = driver.getTitle();
-        Assertions.assertEquals(actualTitle, expectedTitle);
+    public void clickTvProductsBannerLink() {
+        action.click();
+        checkPageTitle(tvProductsBanner, TV_PRODUCTS_BANNER);
+    }
+
+    public void clickActionBannerLink() {
+        action.click();
+        checkPageTitle(bigSale, BIG_SALE_BANNER);
     }
 }

@@ -48,11 +48,11 @@ public class HeaderTest extends BaseTest {
         header.clickCollectionLink();
     }
 
-    @DisplayName("Баннер больше покупка")
-    @Description("Проверяет переход на страницу баннера большая покупка")
+    @DisplayName("Идеи для подарков")
+    @Description("Проверяет переход на страницу идеи для подарков")
     @Test
-    void checkBigSaleBanner() {
-        header.clickActionBannerLink();
+    void checkIdeaForPresent() {
+        header.clickIdeaForPresent();
     }
 
     @DisplayName("Баннер карта москвича")
@@ -97,13 +97,6 @@ public class HeaderTest extends BaseTest {
         header.clickRubberBannerLink();
     }
 
-    @DisplayName("Баннер товары из TV-рекламы")
-    @Description("Проверяет переход на страницу баннера товары из TV-рекламы")
-    @Test
-    void checkTvProductBanner() {
-        header.clickTvProductsBannerLink();
-    }
-
     @DisplayName("Баннер скидка для мобильного приложения")
     @Description("Проверяет переход на страницу баннера скидка для мобильного приложения")
     @Test
@@ -111,24 +104,45 @@ public class HeaderTest extends BaseTest {
         header.clickMobileBannerLink();
     }
 
-    @DisplayName("Баннер ликвидация в leomax")
+    @DisplayName("Проверка выбора региона в модальном окне")
+    @Description("Проверяет что на главной странице отображается выбранный регион")
+    @Test
+    public void checkModalRegion() {
+        header.enterCityAndSelect();
+    }
+
+/*    @DisplayName("Баннер ликвидация в leomax")
     @Description("Проверяет переход на страницу баннера ликвидация в leomax")
     @Test
     void checkLiquidationBanner() {
         header.clickLiquidationBannerLink();
-    }
+    }*/
 
-    @DisplayName("Баннер все по 999")
+/*    @DisplayName("Баннер все по 999")
     @Description("Проверяет переход на страницу баннера все по 999")
     @Test
     void checkFixPriceBanner() {
         header.clickFixPriceBannerLink();
-    }
+    }*/
 
-    @DisplayName("Баннер товар выходного дня")
+/*    @DisplayName("Баннер товар выходного дня")
     @Description("Проверяет переход на страницу баннера товар выходного дня")
     @Test
     void checkDayOffBanner() {
         header.clickDayOffBannerLink();
-    }
+    }*/
+
+    /*    @DisplayName("Баннер больше покупка")
+    @Description("Проверяет переход на страницу баннера большая покупка")
+    @Test
+    void checkBigSaleBanner() {
+        header.clickActionBannerLink();
+    }*/
+
+    /* @DisplayName("Баннер товары из TV-рекламы")
+ @Description("Проверяет переход на страницу баннера товары из TV-рекламы")
+ @Test
+ void checkTvProductBanner() {
+     header.clickTvProductsBannerLink();
+ }*/
 }
