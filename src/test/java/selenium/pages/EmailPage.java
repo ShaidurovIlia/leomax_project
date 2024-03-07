@@ -14,7 +14,7 @@ public class EmailPage extends BasePage {
 
     @FindBy(css = "#email")
     private WebElement emailInput;
-    @FindBy(xpath = "//div[@class='modal-body' and text()='Вы уже подписаны на рассылку.']")
+    @FindBy(xpath = "//div['modal-body' and text()='Вы уже подписаны на рассылку.']")
     private WebElement subscribeMessage;
     @FindBy(xpath = "//div[@class='modal-body' and text()='Вы успешно подписались на рассылку."
             + " Скоро на ваш адрес электронной почты придет письмо с подтверждением.']")
