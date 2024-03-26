@@ -13,25 +13,18 @@ public class BasketTest extends BaseTest {
 
     BasketPage basketPage = new BasketPage();
 
-    @DisplayName("Товар в корзине")
-    @Description("Проверяет товар в корзине добавленный через поисковую строку")
-    @Test
-    void checkOrderBasket() {
-        basketPage.searchProductAndAddToBasket();
-    }
-
     @DisplayName("Промокод")
     @Description("Проверяет работу промокода в корзине")
     @Test
     void checkPromo() {
-        basketPage.promoInBasket();
+        basketPage.validPromo();
     }
 
-    @DisplayName("Неверный промокод")
-    @Description("Проверяет работу в случаи неверного промокода в корзине")
+    @DisplayName("Лот в корзине")
+    @Description("Проверяет лот в корзине добавленный через поисковую строку")
     @Test
-    void checkWrongPromo() {
-        basketPage.wrongPromoInBasket();
+    void checkOrderBasket() {
+        basketPage.searchProductAndAddToBasket();
     }
 
     @DisplayName("Оформление быстрого заказа")
@@ -41,12 +34,40 @@ public class BasketTest extends BaseTest {
         basketPage.fastOrderInBasket();
     }
 
-    @DisplayName("Карта москвича новая")
-    @Description("Проверяет работу карты москвича нового формата в корзине")
+    @DisplayName("Карта Много.ру")
+    @Description("Проверяет работу карты Много.ру в корзине")
     @Test
-    void checkNewMoscowCard() {
-        basketPage.newMoscowCardInBasket();
+    void checkMnogoRuCard() {
+        basketPage.mnogoRuCardInBasket();
     }
+
+    @DisplayName("Добавление лота в избранное")
+    @Description("Проверяет добавление лота в избранное из корзины")
+    @Test
+    void checkFavorites() {
+        basketPage.addInFavorites();
+    }
+
+    @DisplayName("Удаление лота из корзины")
+    @Description("Проверяет удаление лота из корзины")
+    @Test
+    void checkEmptyBasket() {
+        basketPage.deleteFromBasket();
+    }
+
+    @DisplayName("Удаление лота из избранного")
+    @Description("Проверяет удаление лота из избранного через корзину")
+    @Test
+    void checkFavoriteLotKt() {
+        basketPage.deleteFavorites();
+    }
+}
+/*
+    @DisplayName("Неверный промокод")
+    @Description("Проверяет работу в случаи неверного промокода в корзине")
+    @Test
+    void checkPromoNoValid() {
+        basketPage.noValidPromo();
 
     @DisplayName("Неверная карта москвича старая")
     @Description("Проверяет сообщение о неверной карте москвича старого формата в корзине")
@@ -60,32 +81,6 @@ public class BasketTest extends BaseTest {
     @Test
     void checkWrongNewMoscowCard() {
         basketPage.wrongNewMoscowCardInBasket();
-    }
-
-    @DisplayName("Карта москвича старая")
-    @Description("Проверяет работу карты москвича старого формата в корзине")
-    @Test
-    void checkOldMoscowCard() {
-        basketPage.oldMoscowCardInBasket();
-    }
-
-    @DisplayName("Карта Много.ру")
-    @Description("Проверяет работу карты Много.ру в корзине")
-    @Test
-    void checkMnogoRuCard() {
-        basketPage.mnogoRuCardInBasket();
-    }
-
-
-    /* Доработать тест на проверку сообщения
-
-  @DisplayName("Ограничение количества товаров")
-=======
- /*   @DisplayName("Ограничение количества товаров")
->>>>>>> origin/master
-    @Description("Проверяет наличие сообщения о превышении количества товаров в корзине")
-    @Test
-    void checkMaxProduct() {
-        basketPage.maxQuantityProductInBasket();
     }*/
-}
+
+

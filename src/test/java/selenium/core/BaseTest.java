@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import selenium.pages.BasePage;
+import selenium.readProperties.ConfigProvider;
 
 @ExtendWith(TestListener.class)
 abstract public class BaseTest {
@@ -13,7 +14,7 @@ abstract public class BaseTest {
     @BeforeAll
     public static void setUp() {
         driver = WebDriverFactory.createChromeDriver();
-        driver.get("https://leomax.ru/");
+        driver.get(ConfigProvider.URL);
         PopupLocation.closePopupIfDisplayed(driver);
         BasePage.setDriver(driver);
     }
@@ -21,7 +22,6 @@ abstract public class BaseTest {
     @AfterAll
     public static void tearDown() {
         if (driver != null) {
-            driver.manage().deleteAllCookies();
             driver.quit();
         }
     }
