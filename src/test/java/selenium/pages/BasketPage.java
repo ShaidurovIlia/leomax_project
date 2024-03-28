@@ -137,10 +137,10 @@ public class BasketPage extends BasePage {
     }
 
     public void addToBasket() {
-        search.click();
-        search.sendKeys(SEARCH_PRODUCT + Keys.RETURN);
-        wait.until(ExpectedConditions.elementToBeClickable(orderClick));
-        orderClick.click();
+        /*search.click();*/
+        search.sendKeys(SEARCH_PRODUCT);
+        search.sendKeys(Keys.ENTER);
+        wait.until(ExpectedConditions.elementToBeClickable(orderClick)).click();
         size.click();
         buy.click();
         wait.until(ExpectedConditions.elementToBeClickable(basket));

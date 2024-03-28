@@ -1,11 +1,16 @@
 package selenium.pages;
 
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.readProperties.ConfigProvider;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -112,6 +117,8 @@ public class FooterPage extends BasePage {
         driver.get(ConfigProvider.URL);
         PageFactory.initElements(driver, this);
     }
+
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
     public void clickWomenClothing() {
         checkPageTitle(womenClothing, WOMEN_CLOTHING_TITLE);
@@ -226,7 +233,10 @@ public class FooterPage extends BasePage {
     }
 
     private void checkPageTitle(WebElement element, String expectedTitle) {
-        element.click();
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Keys.END).perform();
+
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
         String actualTitle = driver.getTitle();
         Assertions.assertEquals(actualTitle, expectedTitle);
     }
