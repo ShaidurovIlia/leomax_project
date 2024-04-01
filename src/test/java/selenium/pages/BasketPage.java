@@ -177,8 +177,7 @@ public class BasketPage extends BasePage {
 
     public void addInFavorites() {
         addToBasket();
-        Actions actions = new Actions(driver);
-        actions.doubleClick(addFavorites).perform();
+        addFavorites.click();
         wait.until(ExpectedConditions.elementToBeClickable(favorites));
         favorites.click();
         Assertions.assertTrue(checkProduct.isDisplayed());
