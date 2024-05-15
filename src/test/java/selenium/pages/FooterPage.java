@@ -33,7 +33,7 @@ public class FooterPage extends BasePage {
     private static final String DECORATING_TITLE = "Купить ювелирные украшения в интернет-магазине Леомакс";
     private static final String DELIVERY_TITLE = "Доставка и сервисный сбор";
     private static final String PAYMENT_TITLE = "Способы оплаты товаров | Leomax";
-    private static final String REFUND_TITLE = "Условия возвтрата товаров | Leomax";
+    private static final String REFUND_TITLE = "Условия возврата товаров | Leomax";
     private static final String HELP_TITLE = "Поддержка клиентов и покупателей | Leomax";
     private static final String RULES_TITLE = "Правила акций";
     private static final String HALVA_TITLE = "Халва";
@@ -88,7 +88,7 @@ public class FooterPage extends BasePage {
     private WebElement telecast;
     @FindBy(css = ".col-sm-3 a[href='/personal/']")
     private WebElement personal;
-    @FindBy(css = ".col-sm-3 a[href='https://advcake.com/lp/leomax/']")
+    @FindBy(css = "a[href='https://advcake.ru/lp/leomax']")
     private WebElement partner;
     @FindBy(css = ".first__description")
     private WebElement partnerWindow;

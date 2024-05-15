@@ -9,7 +9,7 @@ import selenium.readProperties.ConfigProvider;
 public class CatalogPage extends BasePage {
 
     private static final String OUTERWEAR_TITLE = "Купить верхнюю одежду в интернет-магазине Леомакс";
-    private static final String JACKET_TITLE = "Мужские куртки купить от руб в интернет-магазине Леомакс";
+    private static final String COSTUME_TITLE = "Костюмы мужские купить от руб в интернет-магазине Леомакс";
     private static final String HEADDRESS_TITLE = "Головные уборы купить недорого в интернет-магазине Леомакс";
     private static final String HEALTHY_EATING_TITLE = "Товары для здорового питания купить в интернет-магазине Леомакс";
     private static final String BATHROOM_TITLE = "Купить все для ванной комнаты в интернет-магазине Леомакс";
@@ -29,8 +29,8 @@ public class CatalogPage extends BasePage {
     public WebElement windbreakers;
     @FindBy(css = "a.menu-desktop__title[href='/products/mujskaya_odejda/']")
     public WebElement menClothing;
-    @FindBy(css = "li[data-section-id] a[href='/products/kurtki_mujskie/']")
-    public WebElement menJacket;
+    @FindBy(css = "li[data-section-id] a[href='/products/kostyumy_mujskie/']")
+    public WebElement menCostume;
     @FindBy(css = "a.menu-desktop__title[href='/products/aksessuary/']")
     public WebElement accessory;
     @FindBy(css = "li[data-section-id] a[href='/products/golovnye_ubory/']")
@@ -73,7 +73,7 @@ public class CatalogPage extends BasePage {
     }
 
     public void navigateToMenClothing() {
-        navigateToCategory(menClothing, menJacket, JACKET_TITLE);
+        navigateToCategory(menClothing, menCostume, COSTUME_TITLE);
     }
 
     public void navigateToAccessory() {

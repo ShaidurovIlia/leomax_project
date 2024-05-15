@@ -13,7 +13,7 @@ import selenium.pages.EmailPage;
 public class EmailTest extends BaseTest {
 
     EmailPage email = new EmailPage();
-    String emailAddress = "test@mail.ru";
+    private final String emailAddress = "test@mail.ru";
 
     @DisplayName("Тест подписки с email-генератором")
     @Description("Проверяет подписку на email рассылку с использованием генерированного email")
