@@ -3,9 +3,10 @@ package selenium.pages;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,9 +39,9 @@ public class BasketPage extends BasePage {
     @FindBy(css = ".digi-product:first-child .digi-product__buy .digi-product-buy-btn a")
     private WebElement orderClick;
     @FindBy(css = "label[for='product_2227694белый, 1 шт + 1 шт в подарок']")
-    private WebElement size;
+    private WebElement variant;
     @FindBy(css = "div.short-good-descr__btn-group")
-    private WebElement buy;
+    private WebElement addToBasket;
     @FindBy(css = "div.cart.dropdownBasket span.header__menu-text")
     private WebElement basket;
     @FindBy(css = "a[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/'] .basket-item__title")
@@ -83,7 +84,7 @@ public class BasketPage extends BasePage {
     private WebElement favorites;
     @FindBy(css = "a.title[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/?COLOR_GROUP=2309467']")
     private WebElement checkProduct;
-    @FindBy(css = ".icon.icon-close")
+    @FindBy(css = "tbody .icon.icon-close")
     private WebElement deleteBasket;
     @FindBy(css = "tr.restore-row td[colspan='6']")
     private WebElement checkEmptyBasket;
@@ -99,9 +100,12 @@ public class BasketPage extends BasePage {
     private WebElement favoritesElement;
     @FindBy(css = ".favorites_wrap .js-empty")
     private WebElement checkEmpty;
+    @FindBy(css = ".header__menu-count.header__menu-count--favorites")
+    private WebElement count;
 
     public void searchProductAndAddToBasket() {
         addToBasket();
+        wait.until(ExpectedConditions.visibilityOf(productInBasket));
         Assertions.assertTrue(productInBasket.isDisplayed());
     }
 
@@ -110,6 +114,11 @@ public class BasketPage extends BasePage {
     public BasketPage() {
         driver.get(ConfigProvider.URL);
         PageFactory.initElements(driver, this);
+    }
+
+    private void scrollPageDown() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0, 1000)"); // Scroll down by 1000 pixels or adjust as needed
     }
 
     public void newMoscowCardInBasket() {
@@ -137,18 +146,21 @@ public class BasketPage extends BasePage {
     }
 
     public void addToBasket() {
-        /*search.click();*/
         search.sendKeys(SEARCH_PRODUCT);
+        wait.until(ExpectedConditions.elementToBeClickable(search));
         search.sendKeys(Keys.ENTER);
-        wait.until(ExpectedConditions.elementToBeClickable(orderClick)).click();
-        size.click();
-        buy.click();
+        wait.until(ExpectedConditions.elementToBeClickable(orderClick));
+        orderClick.click();
+        wait.until(ExpectedConditions.elementToBeClickable(variant));
+        variant.click();
+        addToBasket.click();
         wait.until(ExpectedConditions.elementToBeClickable(basket));
         basket.click();
     }
 
     public void fastOrderInBasket() {
         addToBasket();
+        scrollPageDown();
         fastOrder.click();
         formNameInput.sendKeys(NAME);
         formMobileInput.sendKeys(MOBILE);
@@ -169,17 +181,21 @@ public class BasketPage extends BasePage {
 
     public void deleteFromBasket() {
         addToBasket();
-        Actions actions = new Actions(driver);
-        actions.doubleClick(deleteBasket).perform();
-        wait.until(ExpectedConditions.visibilityOf(checkEmptyBasket));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("tbody .icon.icon-close")));
+        deleteBasket.click();
+        wait.until(ExpectedConditions.elementToBeClickable(checkEmptyBasket));
         Assertions.assertTrue(checkEmptyBasket.isDisplayed());
     }
 
     public void addInFavorites() {
         addToBasket();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("td a[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/']")));
         addFavorites.click();
-        wait.until(ExpectedConditions.elementToBeClickable(favorites));
+        wait.until(ExpectedConditions.elementToBeClickable(count));
+        wait.until(ExpectedConditions.textToBePresentInElement(count, "1"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.header li a[href='/personal/favorites/']")));
         favorites.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a.title[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/?COLOR_GROUP=2309467']")));
         Assertions.assertTrue(checkProduct.isDisplayed());
     }
 
@@ -233,6 +249,7 @@ public class BasketPage extends BasePage {
     }
 
     private List<WebElement> findVisiblePromoElements() {
+        wait.until(ExpectedConditions.elementToBeClickable(promoBlock));
         List<WebElement> visiblePromoElements = Stream.of(promoBlock, promoDeactivate)
                 .filter(WebElement::isDisplayed)
                 .collect(Collectors.toList());
@@ -246,7 +263,9 @@ public class BasketPage extends BasePage {
 
     public void deleteFavorites() {
         addInFavorites();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn.btn-sm.btn-primary")));
         deleteFavoritesElement.click();
+        wait.until(ExpectedConditions.elementToBeClickable(checkEmpty));
         Assertions.assertTrue(checkEmpty.isDisplayed());
     }
 }
