@@ -2,6 +2,7 @@ package selenium.tests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import selenium.core.BaseTest;
@@ -111,38 +112,43 @@ public class HeaderTest extends BaseTest {
         header.enterCityAndSelect();
     }
 
-/*    @DisplayName("Баннер ликвидация в leomax")
+    @Disabled("Сейчас баннер не активен")
+    @DisplayName("Баннер ликвидация в leomax")
     @Description("Проверяет переход на страницу баннера ликвидация в leomax")
     @Test
     void checkLiquidationBanner() {
         header.clickLiquidationBannerLink();
-    }*/
+    }
 
-/*    @DisplayName("Баннер все по 999")
+    @Disabled("Сейчас баннер не активен")
+    @DisplayName("Баннер все по 999")
     @Description("Проверяет переход на страницу баннера все по 999")
     @Test
     void checkFixPriceBanner() {
         header.clickFixPriceBannerLink();
-    }*/
+    }
 
-/*    @DisplayName("Баннер товар выходного дня")
+    @Disabled("Сейчас баннер не активен")
+    @DisplayName("Баннер товар выходного дня")
     @Description("Проверяет переход на страницу баннера товар выходного дня")
     @Test
     void checkDayOffBanner() {
         header.clickDayOffBannerLink();
-    }*/
+    }
 
-    /*    @DisplayName("Баннер больше покупка")
+    @Disabled("Сейчас баннер не активен")
+    @DisplayName("Баннер больше покупка")
     @Description("Проверяет переход на страницу баннера большая покупка")
     @Test
     void checkBigSaleBanner() {
         header.clickActionBannerLink();
-    }*/
+    }
 
-    /* @DisplayName("Баннер товары из TV-рекламы")
- @Description("Проверяет переход на страницу баннера товары из TV-рекламы")
- @Test
- void checkTvProductBanner() {
-     header.clickTvProductsBannerLink();
- }*/
+    @Disabled("Сейчас баннер не активен")
+    @DisplayName("Баннер товары из TV-рекламы")
+    @Description("Проверяет переход на страницу баннера товары из TV-рекламы")
+    @Test
+    void checkTvProductBanner() {
+        header.clickTvProductsBannerLink();
+    }
 }
