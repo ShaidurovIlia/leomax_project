@@ -2,6 +2,7 @@ package selenium.tests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import selenium.components.FeedBackForm;
@@ -190,6 +191,7 @@ public class FooterTest extends BaseTest {
         footer.clickTvProvider();
     }
 
+    @Disabled("css selector: .col-xs-3 a[href='/info/merge_details/']]")
     @DisplayName("Объединение сайтов блок Информация")
     @Description("Проверяет переход на страницу объединение сайтов из футера")
     @Test

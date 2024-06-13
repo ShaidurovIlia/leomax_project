@@ -76,7 +76,7 @@ public class FooterPage extends BasePage {
     private WebElement refund;
     @FindBy(css = "a[href='/info/faq/']")
     private WebElement help;
-    @FindBy(css = "a[href='/action/pravila_aktsiy/']")
+    @FindBy(css = ".col-xs-3 ul li a[href='/action/pravila_aktsiy/']")
     private WebElement rules;
     @FindBy(css = ".col-xs-3 a[href='/action/halvacard/']")
     private WebElement halva;
