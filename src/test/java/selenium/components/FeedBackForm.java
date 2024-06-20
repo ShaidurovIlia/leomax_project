@@ -14,7 +14,7 @@ public class FeedBackForm extends BasePage {
     private final String generateName = faker.name().fullName();
     private final String generateComment = faker.lorem().paragraph();
 
-    @FindBy(css = "span[onclick=\"App.modal.showForm('feedback');return false;\"]")
+    @FindBy(css = "span[onclick='App.modal.showForm('feedback');return false;']")
     private WebElement feedBack;
     @FindBy(css = "#feedbackName")
     private WebElement name;

@@ -41,7 +41,7 @@ public class CatalogTest extends BaseTest {
     }
 
     @DisplayName("Каталог - красота и здоровье")
-    @Description("Проверяет переход на страницу лотов здоровое питание")
+    @Description("Проверяет переход на страницу лотов товары для гигиены")
     @Test
     public void searchBeauty() {
         catalogPage.navigateToBeautyHealth();
