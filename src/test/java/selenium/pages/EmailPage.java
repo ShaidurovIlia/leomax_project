@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import selenium.readProperties.ConfigProvider;
 
+import static io.qameta.allure.Allure.step;
+
 public class EmailPage extends BasePage {
 
     private static final Faker faker = new Faker();
@@ -26,16 +28,38 @@ public class EmailPage extends BasePage {
     }
 
     public boolean subscribeWithFakerEmail() {
-        emailInput.click();
-        emailInput.sendKeys(generatedEmail);
-        emailInput.sendKeys(Keys.ENTER);
+        step("Кликаем на форму введите свой E-mail", ()-> {
+            emailInput.click();
+        });
+        step("Вводим адрес E-mail", ()-> {
+            emailInput.sendKeys(generatedEmail);
+        });
+        step("Нажимаем Enter", ()-> {
+            emailInput.sendKeys(Keys.ENTER);
+        });
+        step("Нажимаем Enter", ()-> {
+            emailInput.sendKeys(Keys.ENTER);
+        });
+        step("Проверяем наличие сообщения о подписке нового пользователя", ()-> {
+        });
         return successMessage.isDisplayed();
     }
 
     public boolean subscribeWithEmail(String emailAddress) {
-        emailInput.click();
-        emailInput.sendKeys(emailAddress);
-        emailInput.sendKeys(Keys.ENTER);
+        step("Кликаем на форму введите свой E-mail", ()-> {
+            emailInput.click();
+        });
+        step("Вводим адрес E-mail", ()-> {
+                    emailInput.sendKeys(emailAddress);
+                });
+        step("Нажимаем Enter", ()-> {
+            emailInput.sendKeys(Keys.ENTER);
+        });
+        step("Нажимаем Enter", ()-> {
+            emailInput.sendKeys(Keys.ENTER);
+        });
+        step("Проверяем наличие сообщения о подписке", ()-> {
+        });
         return subscribeMessage.isDisplayed();
     }
 }

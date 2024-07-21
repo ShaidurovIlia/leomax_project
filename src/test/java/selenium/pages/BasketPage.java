@@ -15,11 +15,13 @@ import selenium.readProperties.ConfigProvider;
 
 import java.time.Duration;
 
+import static io.qameta.allure.Allure.step;
+
 @Owner(value = "Илья Шайдуров")
 @DisplayName("Класс BasketPage")
 public class BasketPage extends BasePage {
 
-    private static final String SEARCH_PRODUCT = "102640-11";
+    private static final String RELATIVE_URL = "goods/zhidkaya_rezina_fiks_pro_3_v_1/?COLOR_GROUP=2309467";
     private static final String MNOGORU_NUMBER = "66666666";
     private static final String PROMO = "Соцкарта";
     private static final String NAME = "Тест";
@@ -32,6 +34,8 @@ public class BasketPage extends BasePage {
     private WebElement variant;
     @FindBy(css = "div.short-good-descr__btn-group")
     private WebElement addToBasket;
+    @FindBy(css = ".js_buy_button.btn-buy-detail")
+    private WebElement addToBasketISKT;
     @FindBy(css = "div.cart.dropdownBasket span.header__menu-text")
     private WebElement basket;
     @FindBy(css = "a[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/'] .basket-item__title")
@@ -48,7 +52,7 @@ public class BasketPage extends BasePage {
     private WebElement mnogoApplied;
     @FindBy(css = "a.btn-fast-checkout[href='/order/make/']")
     private WebElement fastOrder;
-    @FindBy(css = ".col-xs-7")
+    @FindBy(css = ".confirm h1")
     private WebElement previewOrder;
     @FindBy(css = "#PERSONAL_NAME")
     private WebElement formNameInput;
@@ -96,6 +100,10 @@ public class BasketPage extends BasePage {
     private WebElement checkEmpty;
     @FindBy(css = ".header__menu-count.header__menu-count--favorites")
     private WebElement count;
+    @FindBy(css = ".ExchangeBanner-close.js-close")
+    private WebElement bannerClause;
+    @FindBy(css = ".popup__btn--disagree.js-disagree")
+    private WebElement clauseApply;
 
     public void searchProductAndAddToBasket() {
         addToBasket();
@@ -110,64 +118,104 @@ public class BasketPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    public void openUrl(String relativeUrl) {
+        driver.get(ConfigProvider.URL + relativeUrl);
+    }
+
     private void scrollPageDown() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        js.executeScript("window.scrollTo(200, document.body.scrollHeight)");
     }
 
     public void validPromo() {
         addToBasket();
-        wait.until(ExpectedConditions.elementToBeClickable(promoField));
-
-        promoField.click();
-        promoInput.sendKeys(PROMO + Keys.ENTER);
-        wait.until(ExpectedConditions.visibilityOf(promoMessage));
-        Assertions.assertTrue(promoMessage.isDisplayed());
+        step("Кликаем на форму для ввода промокода", () -> {
+            wait.until(ExpectedConditions.elementToBeClickable(promoField));
+            promoField.click();
+        });
+        step("Вводим валидный промокод", () -> {
+            promoInput.sendKeys(PROMO + Keys.ENTER);
+        });
+        step("Проверяем наличие сообщения о применении промокода", () -> {
+            wait.until(ExpectedConditions.visibilityOf(promoMessage));
+            Assertions.assertTrue(promoMessage.isDisplayed());
+        });
     }
 
     public void addToBasket() {
-        search.sendKeys(SEARCH_PRODUCT);
-        wait.until(ExpectedConditions.elementToBeClickable(orderClick));
-        orderClick.click();
-        wait.until(ExpectedConditions.elementToBeClickable(variant));
-        variant.click();
-        addToBasket.click();
-        wait.until(ExpectedConditions.elementToBeClickable(basket));
-        basket.click();
+        step("Открываем нужный URL", () -> {
+            openUrl(RELATIVE_URL);
+        });
+        step("Кликаем в добавить в корзину", () -> {
+            addToBasketISKT.click();
+        });
+        step("Ожидаем когда элемент корзина станет кликабельным", () -> {
+            wait.until(ExpectedConditions.elementToBeClickable(basket));
+        });
+        step("Кликаем на корзину", () -> {
+            ;
+            basket.click();
+        });
     }
 
     public void fastOrderInBasket() {
         addToBasket();
         scrollPageDown();
+/*
         wait.until(ExpectedConditions.elementToBeClickable(fastOrder));
-        fastOrder.click();
+*/
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", fastOrder);
+      /*  fastOrder.click();*/
         formNameInput.sendKeys(NAME);
         formMobileInput.sendKeys(MOBILE);
         order.click();
+        wait.until(ExpectedConditions.elementToBeClickable(bannerClause));
+        bannerClause.click();
+        wait.until(ExpectedConditions.elementToBeClickable(clauseApply));
+        clauseApply.click();
+
+        wait.until(ExpectedConditions.invisibilityOf(previewOrder));
+
 
         Assertions.assertTrue(previewOrder.isDisplayed());
     }
 
+  /*  public void hideBanner() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        wait.until(ExpectedConditions.visibilityOf((WebElement) By.cssSelector(".widget.js-popup-main")));
+        js.executeScript("document.querySelector('.widget.js-popup-main').style.display='none';");
+    }*/
+
+
     public void mnogoRuCardInBasket() {
         addToBasket();
         scrollPageDown();
-        mnogoBox.click();
-        mnogoInput.sendKeys(MNOGORU_NUMBER, Keys.RETURN);
+        step("Кликаем на форму для ввода кода много.ру", () -> {
+            mnogoBox.click();
+        });
+        step("Вводим валидный код", () -> {
+            mnogoInput.sendKeys(MNOGORU_NUMBER, Keys.RETURN);
+        });
+        step("Проверяем наличие сообщения о применении промокода", () -> {
+            wait.until(ExpectedConditions.visibilityOf(mnogoApplied));
 
-        wait.until(ExpectedConditions.visibilityOf(mnogoApplied));
-
-        Assertions.assertTrue(mnogoApplied.isDisplayed());
+            Assertions.assertTrue(mnogoApplied.isDisplayed());
+        });
     }
 
     public void deleteFromBasket() {
         String expectedText = "Ваша корзина пуста. Наполните её товарами из нашего интернет-магазина ;)";
         addToBasket();
+        step("Кликаем на очистку корзины", ()-> {
         wait.until(ExpectedConditions.elementToBeClickable(deleteBasket));
         deleteBasket.click();
+        });
         wait.until(ExpectedConditions.visibilityOf(basketEmpty));
-
+        step("Проверяем наличие сообщения о пустой корзине", ()-> {
         String actualText = basketTitle.getText();
         Assertions.assertEquals(expectedText, actualText);
+        });
     }
 
     public void addInFavorites() {

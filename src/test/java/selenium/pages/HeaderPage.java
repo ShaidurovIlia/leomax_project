@@ -1,10 +1,15 @@
 package selenium.pages;
 
+import org.aspectj.apache.bcel.ExceptionConstants;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.readProperties.ConfigProvider;
+
+import java.time.Duration;
 
 public class HeaderPage extends BasePage {
 
@@ -74,12 +79,16 @@ public class HeaderPage extends BasePage {
     private WebElement list;
     @FindBy(css = ".choose-your-city__button")
     private WebElement choice;
-    @FindBy(xpath = "//div[@id='hints-field']//div[contains(text(), 'Саратовская обл, Саратов г')]")
+    @FindBy(css = "#hints-field")
+    private WebElement field;
+    @FindBy(xpath = ".hint_item[onclick*=\"'Саратовская обл, Саратов'\"]")
     private WebElement enterCity;
     @FindBy(css = ".top-contacts-header__city")
     private WebElement elementCity;
     @FindBy(css = ".modal-city-selection__button_indication")
     private WebElement choiceIndication;
+
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
     public HeaderPage() {
         driver.get(ConfigProvider.URL);
@@ -156,7 +165,8 @@ public class HeaderPage extends BasePage {
         elementCity.click();
         choiceIndication.click();
         list.sendKeys(city);
-        enterCity.click();
+        wait.until(ExpectedConditions.visibilityOf(field));
+        wait.until(ExpectedConditions.elementToBeClickable(enterCity)).click();
         choice.click();
         Assertions.assertTrue(elementCity.isDisplayed());
     }

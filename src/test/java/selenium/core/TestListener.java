@@ -1,11 +1,12 @@
 package selenium.core;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogType;
 
@@ -17,13 +18,13 @@ public class TestListener implements TestWatcher {
     public void testFailed(ExtensionContext context, Throwable cause) {
         attachBrowserLogs();
         attachScreenshot();
+        attachLog(context.getDisplayName());
     }
 
-    @Attachment("Browser Logs")
+    @Attachment(value = "Browser Logs", type = "text/plain")
     private byte[] attachBrowserLogs() {
-        WebDriver webDriver = driver;
-        if (webDriver != null) {
-            LogEntries logs = webDriver.manage().logs().get(LogType.BROWSER);
+        if (driver != null) {
+            LogEntries logs = driver.manage().logs().get(LogType.BROWSER);
             StringBuilder logText = new StringBuilder();
             logs.forEach(entry -> logText.append(entry.getMessage()).append("\n"));
             return logText.toString().getBytes();
@@ -31,12 +32,16 @@ public class TestListener implements TestWatcher {
         return new byte[0];
     }
 
-    @Attachment("Screenshot")
+    @Attachment(value = "Screenshot", type = "image/png")
     private byte[] attachScreenshot() {
-        WebDriver webDriver = driver;
-        if (webDriver != null) {
-            return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
+        if (driver != null) {
+            return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         }
         return new byte[0];
+    }
+
+    @Step("{stepDescription}")
+    public void attachLog(String stepDescription) {
+        Allure.step(stepDescription);
     }
 }

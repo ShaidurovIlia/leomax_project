@@ -13,7 +13,7 @@ public class CatalogPage extends BasePage {
     private static final String OUTERWEAR_TITLE = "Купить верхнюю одежду в интернет-магазине Леомакс";
     private static final String COSTUME_TITLE = "Костюмы мужские купить от руб в интернет-магазине Леомакс";
     private static final String HEADDRESS_TITLE = "Головные уборы купить недорого в интернет-магазине Леомакс";
-    private static final String HEALTHY_EATING_TITLE = "Товары для гигиены и ухода купить по выгодной цене в интернет магазине LEOMAX";
+    private static final String COSMETICS_TITLE = "Купить косметику для макияжа в интернет-магазине Леомакс";
     private static final String BATHROOM_TITLE = "Купить все для ванной комнаты в интернет-магазине Леомакс";
     private static final String COOKING_TITLE = "Посуда для приготовления купить в интернет-магазине Леомакс";
     private static final String HOME_SHOES_TITLE = "Домашняя обувь купить в интернет-магазине Леомакс";
@@ -39,8 +39,8 @@ public class CatalogPage extends BasePage {
     public WebElement headdress;
     @FindBy(css = "a.menu-desktop__title[href='/products/krasota_i_zdorove/']")
     public WebElement beautyHealth;
-    @FindBy(css = "li[data-section-id] a[href='/products/gigiena_i_uhod/']")
-    public WebElement gigienaIUhod;
+    @FindBy(css = "li[data-section-id] a[href='/products/kosmetika_i_uhod/']")
+    public WebElement cosmetics;
     @FindBy(css = "a.menu-desktop__title[href='/products/tovary_dlya_doma_dachi_i_otdyha/']")
     public WebElement homeProduct;
     @FindBy(css = "li [data-section-id] [href='/products/vannaya_komnata/']")
@@ -82,7 +82,7 @@ public class CatalogPage extends BasePage {
     }
 
     public void navigateToBeautyHealth() {
-        navigateToCategory(beautyHealth, gigienaIUhod, HEALTHY_EATING_TITLE);
+        navigateToCategory(beautyHealth, cosmetics, COSMETICS_TITLE);
     }
 
     public void navigateToHomeProduct() {

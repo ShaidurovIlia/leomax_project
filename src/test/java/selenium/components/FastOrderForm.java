@@ -20,8 +20,8 @@ public class FastOrderForm extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void fillForm() {
-        name.sendKeys("Тест");
-        mobile.sendKeys("+70000000000");
+    public void fillForm(String nameUser, String numberPhone) {
+        name.sendKeys(nameUser);
+        mobile.sendKeys(numberPhone);
     }
 }

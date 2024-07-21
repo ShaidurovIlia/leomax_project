@@ -77,6 +77,7 @@ public class HeaderTest extends BaseTest {
         header.clickPaymentBannerLink();
     }
 
+    @Disabled("Сейчас баннер не активен")
     @DisplayName("Баннер халва")
     @Description("Проверяет  переход на страницу баннера халва")
     @Test
@@ -105,6 +106,7 @@ public class HeaderTest extends BaseTest {
         header.clickMobileBannerLink();
     }
 
+    @Disabled("Не работает выбор элемента из выпадающего списка")
     @DisplayName("Проверка выбора региона в модальном окне")
     @Description("Проверяет что на главной странице отображается выбранный регион")
     @Test

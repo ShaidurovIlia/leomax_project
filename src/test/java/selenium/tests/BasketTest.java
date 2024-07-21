@@ -8,11 +8,9 @@ import org.junit.jupiter.api.Test;
 import selenium.core.BaseTest;
 import selenium.pages.BasketPage;
 
-@Disabled("Тесты не работают т.к. лота нет в наличии")
 @Owner(value = "Илья Шайдуров")
 @DisplayName("Класс BasketTest")
 public class BasketTest extends BaseTest {
-
     BasketPage basketPage = new BasketPage();
 
     @DisplayName("Промокод")
@@ -29,6 +27,7 @@ public class BasketTest extends BaseTest {
         basketPage.searchProductAndAddToBasket();
     }
 
+    @Disabled("В процессе разработки БЗ")
     @DisplayName("Оформление быстрого заказа")
     @Description("Проверяет оформление быстрого заказа из корзины")
     @Test
@@ -50,13 +49,15 @@ public class BasketTest extends BaseTest {
         basketPage.deleteFromBasket();
     }
 
-
+    @Disabled("В процессе разработки 'из избранного' ")
     @DisplayName("Удаление лота из избранного")
     @Description("Проверяет удаление лота из избранного через корзину")
     @Test
     void checkFavoriteLotKt() {
         basketPage.deleteFavorites();
     }
+
+    @Disabled("В процессе разработки 'в избранное'")
 
     @DisplayName("Добавление лота в избранное")
     @Description("Проверяет добавление лота в избранное из корзины")
