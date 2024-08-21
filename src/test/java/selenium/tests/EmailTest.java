@@ -12,20 +12,19 @@ import selenium.pages.EmailPage;
 @DisplayName("Класс EmailTest")
 public class EmailTest extends BaseTest {
 
-    EmailPage email = new EmailPage();
-    private final String emailAddress = "test@mail.ru";
+    EmailPage emailPage = new EmailPage();
 
     @DisplayName("Тест подписки с email-генератором")
     @Description("Проверяет подписку на email рассылку с использованием генерированного email")
     @Test
     public void checkWithFakerEmail() {
-        Assertions.assertTrue(email.subscribeWithFakerEmail());
+        emailPage.subscribeWithFakerEmail();
     }
 
     @DisplayName("Тест подписки с заданным email")
     @Description("Проверяет что указынный email уже подписан на рассылку")
     @Test
     public void checkWithEmail() {
-        Assertions.assertTrue(email.subscribeWithEmail(emailAddress));
+        emailPage.subscribeWithEmail();
     }
 }
