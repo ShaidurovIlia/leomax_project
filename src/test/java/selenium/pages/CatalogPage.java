@@ -108,48 +108,25 @@ public class CatalogPage extends BasePage {
 
 
     private void navigateToCategory(WebElement firstLevel, WebElement secondLevel, String expectedTitle) {
-        step("Кликаем на каталог", () -> {
-            catalog.click();
-        });
-        step("Кликаем на категорию", () -> {
-            firstLevel.click();
-        });
-        step("Кликаем на подкатегорию", () -> {
-            secondLevel.click();
-        });
-        step("Проверяем title страницы", () -> {
-            checkPageTitle(expectedTitle);
-        });
+        step("Кликаем на каталог", catalog::click);
+        step("Кликаем на категорию", firstLevel::click);
+        step("Кликаем на подкатегорию", secondLevel::click);
+        step("Проверяем title страницы", () ->
+            checkPageTitle(expectedTitle));
     }
 
     public void navigateToLiquidation() {
-        step("Кликаем на каталог", () -> {
-            catalog.click();
-        });
-        step("Кликаем на ликвидацию", () -> {
-            liquidation.click();
-        });
-        step("Проверяем title страницы ликвидация", () -> {
-            checkPageTitle(LIQUIDATION_TITLE);
-        });
+        step("Кликаем на каталог", catalog::click);
+        step("Кликаем на ликвидацию", liquidation::click);
+        step("Проверяем title страницы ликвидация", () -> checkPageTitle(LIQUIDATION_TITLE));
     }
 
     public void navigateToThreeLevel(WebElement firstLevel, WebElement secondLevel,
                                      WebElement threeLevel, String expectedTitle) {
-        step("Кликаем на каталог", () -> {
-            catalog.click();
-        });
-        step("Кликаем на категорию", () -> {
-            firstLevel.click();
-        });
-        step("Кликаем на подкатегорию", () -> {
-            secondLevel.click();
-        });
-        step("Кликаем на категорию 3 увроня", () -> {
-            threeLevel.click();
-        });
-        step("Проверяем title страницы", () -> {
-            checkPageTitle(expectedTitle);
-        });
+        step("Кликаем на каталог", catalog::click);
+        step("Кликаем на категорию", firstLevel::click);
+        step("Кликаем на подкатегорию", secondLevel::click);
+        step("Кликаем на категорию 3 увроня", threeLevel::click);
+        step("Проверяем title страницы", () -> checkPageTitle(expectedTitle));
     }
 }
