@@ -77,7 +77,6 @@ public class HeaderTest extends BaseTest {
         header.clickPaymentBannerLink();
     }
 
-    @Disabled("Сейчас баннер не активен")
     @DisplayName("Баннер халва")
     @Description("Проверяет  переход на страницу баннера халва")
     @Test
@@ -114,43 +113,17 @@ public class HeaderTest extends BaseTest {
         header.enterCityAndSelect();
     }
 
-    @Disabled("Сейчас баннер не активен")
-    @DisplayName("Баннер ликвидация в leomax")
-    @Description("Проверяет переход на страницу баннера ликвидация в leomax")
+    @DisplayName("Баннер оригинальные товары Leomax")
+    @Description("Проверяет переход на страницу баннера товары Leomax")
     @Test
-    void checkLiquidationBanner() {
-        header.clickLiquidationBannerLink();
+    void checkOriginalProductsBanner() {
+        header.clickOriginalProductsBannerLink();
     }
 
-    @Disabled("Сейчас баннер не активен")
-    @DisplayName("Баннер все по 999")
-    @Description("Проверяет переход на страницу баннера все по 999")
-    @Test
-    void checkFixPriceBanner() {
-        header.clickFixPriceBannerLink();
-    }
-
-    @Disabled("Сейчас баннер не активен")
-    @DisplayName("Баннер товар выходного дня")
-    @Description("Проверяет переход на страницу баннера товар выходного дня")
+    @DisplayName("Баннер Мокка")
+    @Description("Проверяет переход на страницу баннера Мокка")
     @Test
     void checkDayOffBanner() {
-        header.clickDayOffBannerLink();
-    }
-
-    @Disabled("Сейчас баннер не активен")
-    @DisplayName("Баннер больше покупка")
-    @Description("Проверяет переход на страницу баннера большая покупка")
-    @Test
-    void checkBigSaleBanner() {
-        header.clickActionBannerLink();
-    }
-
-    @Disabled("Сейчас баннер не активен")
-    @DisplayName("Баннер товары из TV-рекламы")
-    @Description("Проверяет переход на страницу баннера товары из TV-рекламы")
-    @Test
-    void checkTvProductBanner() {
-        header.clickTvProductsBannerLink();
+        header.clickMokkaBannerLink();
     }
 }

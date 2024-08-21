@@ -1,6 +1,5 @@
 package selenium.pages;
 
-import org.aspectj.apache.bcel.ExceptionConstants;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,26 +10,27 @@ import selenium.readProperties.ConfigProvider;
 
 import java.time.Duration;
 
+import static io.qameta.allure.Allure.step;
+
 public class HeaderPage extends BasePage {
 
-    private static final String FIX_PRICE_TITLE = "Каталог товаров интернет-магазина Leomax.ru";
-    private static final String DAY_OFF_TITLE = "Ледоступы-ледоходы купить в интернет-магазине Leomax";
+    private static final String ORIGINAL_TITLE = "Товары Leоmax";
     private static final String ACTION_TITLE = "Акции и скидки телемагазина LEOMAX";
     private static final String BRAND_TITLE = "Бренды | Интернет-магазин LEOMAX";
     private static final String TELECAST_TITLE = "Онлайн ТВ";
     private static final String ADVERTISING_TITLE = "Самые продаваемые товары от Леомакс | Leomax";
     private static final String COLLECTION_TITLE = "Новая коллекция";
     private static final String IDEA_TITLE = "Идеи для подарков";
-    private static final String BIG_SALE_BANNER = "Больше покупка = больше выгода";
     private static final String MSK_CARD_BANNER = "У вас есть карта москвича? Воспользуйтесь ей и получите скидку на заказ!";
     private static final String MNOGORU_BANNER = "Бонусная программа клуба MNOGO.RU®";
     private static final String PAYMENT_BANNER = "Способы оплаты товаров | Leomax";
     private static final String HALVA_BANNER = "Халва";
     private static final String BONUS_BANNER = "Программа лояльности Leomax Bonus";
-    private static final String TV_PRODUCTS_BANNER = "Товары из TV-рекламы";
     private static final String MOBILE_BANNER = "Мобильное приложение Leomax";
-    private static final String LIQUIDATION_BANNER = "Ликвидация товаров интернет-магазина Леомакс";
+    private static final String MOKKA_BANNER = "Интернет-магазин leomax.ru";
+
     private final String city = "Саратов";
+
     @FindBy(css = "a.bottom-header__link[href='/action/']")
     private WebElement action;
     @FindBy(css = ".action-title")
@@ -45,10 +45,6 @@ public class HeaderPage extends BasePage {
     private WebElement collection;
     @FindBy(css = "a.bottom-header__link.bottom-header__link-ideas")
     private WebElement idea;
-    @FindBy(css = "div.digi-product__label [target='_blank']")
-    private WebElement cat;
-    @FindBy(css = "a[href='/action/cpa_kaskad_2023-11']")
-    private WebElement bigSale;
     @FindBy(css = "a[href='/action/karta-moskvicha/']")
     private WebElement mskCard;
     @FindBy(css = "a[href='/action/mnogoru']")
@@ -69,10 +65,10 @@ public class HeaderPage extends BasePage {
     private WebElement liquidationBanner;
     @FindBy(css = ".col-xs-10 .brand-row__item-name")
     private WebElement liquidationBannerInput;
-    @FindBy(css = "a[href='/action/vsyee_po_999/']")
-    private WebElement fixPrice;
-    @FindBy(css = "a[href='/goods/ledostupy_ledokhody/']")
-    private WebElement dayOff;
+    @FindBy(css = "a[href='/action/tovar_leomax']")
+    private WebElement originalProducts;
+    @FindBy(css = "a[href='/landings/mokka/']")
+    private WebElement mokka;
     @FindBy(css = "div.col-xs-10 h1.brand-row__item-name")
     private WebElement rubber;
     @FindBy(css = "#KLADR_CITY")
@@ -95,10 +91,17 @@ public class HeaderPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    private void checkPageTitle(WebElement element, String expectedTitle) {
-        element.click();
-        String actualTitle = driver.getTitle();
-        Assertions.assertEquals(actualTitle, expectedTitle);
+    private void checkPageTitle(WebElement elementPage, String expectedTitle) {
+        step("Кликаем на баннер", elementPage::click);
+        step("Проверяем соответствие описания страницы", () -> {
+            String actualTitle = driver.getTitle();
+            Assertions.assertEquals(expectedTitle, actualTitle);
+        });
+    }
+
+    private void clickActionAndCheckBanner(WebElement bannerElement, String expectedTitle) {
+        step("Кликаем на вкладку Акции", action::click);
+        checkPageTitle(bannerElement, expectedTitle);
     }
 
     public void clickActionsLink() {
@@ -126,39 +129,34 @@ public class HeaderPage extends BasePage {
     }
 
     public void clickMskCardBannerLink() {
-        action.click();
-        checkPageTitle(mskCard, MSK_CARD_BANNER);
+        clickActionAndCheckBanner(mskCard, MSK_CARD_BANNER);
     }
 
     public void clickMnogoRuBannerLink() {
-        action.click();
-        checkPageTitle(mnogoRu, MNOGORU_BANNER);
+        clickActionAndCheckBanner(mnogoRu, MNOGORU_BANNER);
     }
 
     public void clickPaymentBannerLink() {
-        action.click();
-        checkPageTitle(payment, PAYMENT_BANNER);
+        clickActionAndCheckBanner(payment, PAYMENT_BANNER);
     }
 
     public void clickHalvaBannerLink() {
-        action.click();
-        checkPageTitle(halva, HALVA_BANNER);
+        clickActionAndCheckBanner(halva, HALVA_BANNER);
     }
 
     public void clickBonusBannerLink() {
-        action.click();
-        checkPageTitle(bonus, BONUS_BANNER);
+        clickActionAndCheckBanner(bonus, BONUS_BANNER);
     }
 
     public void clickMobileBannerLink() {
-        action.click();
-        checkPageTitle(mobileBanner, MOBILE_BANNER);
+        clickActionAndCheckBanner(mobileBanner, MOBILE_BANNER);
     }
 
     public void clickRubberBannerLink() {
-        action.click();
-        rubberBanner.click();
-        rubber.isDisplayed();
+        step("Кликаем на вкладку Акции", action::click);
+        step("Кликаем на баннер Жидкая резина", rubberBanner::click);
+        step("Проверяем открытие страницы с лотом Жидкая резина", () ->
+                Assertions.assertTrue(rubber.isDisplayed()));
     }
 
     public void enterCityAndSelect() {
@@ -171,28 +169,11 @@ public class HeaderPage extends BasePage {
         Assertions.assertTrue(elementCity.isDisplayed());
     }
 
-    public void clickLiquidationBannerLink() {
-        action.click();
-        checkPageTitle(liquidationBanner, LIQUIDATION_BANNER);
+    public void clickOriginalProductsBannerLink() {
+        clickActionAndCheckBanner(originalProducts, ORIGINAL_TITLE);
     }
 
-    public void clickFixPriceBannerLink() {
-        action.click();
-        checkPageTitle(fixPrice, FIX_PRICE_TITLE);
-    }
-
-    public void clickDayOffBannerLink() {
-        action.click();
-        checkPageTitle(dayOff, DAY_OFF_TITLE);
-    }
-
-    public void clickTvProductsBannerLink() {
-        action.click();
-        checkPageTitle(tvProductsBanner, TV_PRODUCTS_BANNER);
-    }
-
-    public void clickActionBannerLink() {
-        action.click();
-        checkPageTitle(bigSale, BIG_SALE_BANNER);
+    public void clickMokkaBannerLink() {
+        clickActionAndCheckBanner(mokka, MOKKA_BANNER);
     }
 }
