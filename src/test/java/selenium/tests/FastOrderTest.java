@@ -2,6 +2,7 @@ package selenium.tests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import selenium.core.BaseTest;
@@ -11,10 +12,12 @@ import selenium.pages.FastOrderPage;
 @DisplayName("Класс FastOrderTest")
 public class FastOrderTest extends BaseTest {
     FastOrderPage fastOrderPage = new FastOrderPage();
+
+    @Disabled("После появления капчи тест не проходит")
     @DisplayName("Быстрый заказ из КТ")
     @Description("Проверяет работу быстрого заказа из КТ")
     @Test
     void fastOrderInCardProduct() {
-        fastOrderPage.form();
+        fastOrderPage.submitFastOrder();
     }
 }
