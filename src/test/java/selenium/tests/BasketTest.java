@@ -21,7 +21,7 @@ public class BasketTest extends BaseTest {
     }
 
     @DisplayName("Лот в корзине")
-    @Description("Проверяет лот в корзине добавленный через поисковую строку")
+    @Description("Проверяет добавленный лот в корзине")
     @Test
     void checkOrderBasket() {
         basketPage.searchProductAndAddToBasket();
@@ -33,6 +33,13 @@ public class BasketTest extends BaseTest {
     @Test
     void checkFastOrder() {
         basketPage.fastOrderInBasket();
+    }
+
+    @DisplayName("Избранное")
+    @Description("Проверяет добавление лота в избранное из КТ")
+    @Test
+    void checkAddInFavorites() {
+        basketPage.addInFavorites();
     }
 
     @DisplayName("Карта Много.ру")
@@ -58,12 +65,11 @@ public class BasketTest extends BaseTest {
     }
 
     @Disabled("В процессе разработки 'в избранное'")
-
     @DisplayName("Добавление лота в избранное")
     @Description("Проверяет добавление лота в избранное из корзины")
     @Test
     void checkFavorites() {
-        basketPage.addInFavorites();
+        basketPage.addInFavoritesFromBasket();
     }
 }
 

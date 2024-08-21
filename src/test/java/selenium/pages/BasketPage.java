@@ -26,16 +26,10 @@ public class BasketPage extends BasePage {
     private static final String PROMO = "Соцкарта";
     private static final String NAME = "Тест";
     private static final String MOBILE = "0000000000";
-    @FindBy(css = "input.ac_input[name='q']")
-    private WebElement search;
-    @FindBy(css = ".digi-product:first-child .digi-product__buy .digi-product-buy-btn a")
-    private WebElement orderClick;
-    @FindBy(css = "label[for='product_2227694белый, 1 шт + 1 шт в подарок']")
-    private WebElement variant;
-    @FindBy(css = "div.short-good-descr__btn-group")
-    private WebElement addToBasket;
+    private static final String DELETE_BASKET = "Ваша корзина пуста. Наполните её товарами из нашего интернет-магазина ;)";
+
     @FindBy(css = ".js_buy_button.btn-buy-detail")
-    private WebElement addToBasketISKT;
+    private WebElement addToBasketIsKT;
     @FindBy(css = "div.cart.dropdownBasket span.header__menu-text")
     private WebElement basket;
     @FindBy(css = "a[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/'] .basket-item__title")
@@ -74,6 +68,8 @@ public class BasketPage extends BasePage {
     private WebElement descriptionApplyPromo;
     @FindBy(css = "td .btn.btn-href.btn-favorite")
     private WebElement addFavorites;
+    @FindBy(css = ".col-sm-6 div.item-label-block-favorite")
+    private WebElement favoritesIcon;
     @FindBy(css = "div.header li a[href='/personal/favorites/']")
     private WebElement favorites;
     @FindBy(css = "a.title[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/?COLOR_GROUP=2309467']")
@@ -84,18 +80,8 @@ public class BasketPage extends BasePage {
     private WebElement basketEmpty;
     @FindBy(css = ".basket-empty p")
     private WebElement basketTitle;
-    @FindBy(css = "tr.restore-row td[colspan='6']")
-    private WebElement checkEmptyBasket;
-    @FindBy(css = ".social-card__label-text")
-    private WebElement socialCardField;
-    @FindBy(css = ".social-card-applied .btn-deactivate")
-    private WebElement socialCardDeactivate;
-    @FindBy(css = ".social-card-container .social-card__error")
-    private WebElement wrongMscTitle;
     @FindBy(css = ".btn.btn-sm.btn-primary")
     private WebElement deleteFavoritesElement;
-    @FindBy(css = "div.header li a[href='/personal/favorites/']")
-    private WebElement favoritesElement;
     @FindBy(css = ".favorites_wrap .js-empty")
     private WebElement checkEmpty;
     @FindBy(css = ".header__menu-count.header__menu-count--favorites")
@@ -127,6 +113,11 @@ public class BasketPage extends BasePage {
         js.executeScript("window.scrollTo(200, document.body.scrollHeight)");
     }
 
+    private void orderButton() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", fastOrder);
+    }
+
     public void validPromo() {
         addToBasket();
         step("Кликаем на форму для ввода промокода", () -> {
@@ -143,96 +134,83 @@ public class BasketPage extends BasePage {
     }
 
     public void addToBasket() {
-        step("Открываем нужный URL", () -> {
-            openUrl(RELATIVE_URL);
-        });
-        step("Кликаем в добавить в корзину", () -> {
-            addToBasketISKT.click();
-        });
+        step("Открываем нужный URL", () -> openUrl(RELATIVE_URL));
+        step("Кликаем на кнопку добавить в корзину", () -> addToBasketIsKT.click());
         step("Ожидаем когда элемент корзина станет кликабельным", () -> {
             wait.until(ExpectedConditions.elementToBeClickable(basket));
         });
-        step("Кликаем на корзину", () -> {
-            ;
-            basket.click();
-        });
+        step("Кликаем на корзину", () -> basket.click());
     }
 
     public void fastOrderInBasket() {
         addToBasket();
         scrollPageDown();
-/*
-        wait.until(ExpectedConditions.elementToBeClickable(fastOrder));
-*/
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", fastOrder);
-      /*  fastOrder.click();*/
-        formNameInput.sendKeys(NAME);
-        formMobileInput.sendKeys(MOBILE);
-        order.click();
+        step("Кликаем на кнопку Быстрый заказ", () -> orderButton());
+        step("Заполняем поле Имя", () -> formNameInput.sendKeys(NAME));
+        step("Заполняем поле Телефон", () -> formMobileInput.sendKeys(MOBILE));
+        step("Кликаем на кнопку Оформить заказ", () -> order.click());
         wait.until(ExpectedConditions.elementToBeClickable(bannerClause));
         bannerClause.click();
         wait.until(ExpectedConditions.elementToBeClickable(clauseApply));
         clauseApply.click();
-
         wait.until(ExpectedConditions.invisibilityOf(previewOrder));
-
-
         Assertions.assertTrue(previewOrder.isDisplayed());
     }
-
-  /*  public void hideBanner() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        wait.until(ExpectedConditions.visibilityOf((WebElement) By.cssSelector(".widget.js-popup-main")));
-        js.executeScript("document.querySelector('.widget.js-popup-main').style.display='none';");
-    }*/
-
 
     public void mnogoRuCardInBasket() {
         addToBasket();
         scrollPageDown();
-        step("Кликаем на форму для ввода кода много.ру", () -> {
-            mnogoBox.click();
-        });
-        step("Вводим валидный код", () -> {
-            mnogoInput.sendKeys(MNOGORU_NUMBER, Keys.RETURN);
-        });
+        step("Кликаем на форму для ввода кода много.ру", () -> mnogoBox.click());
+        step("Вводим валидный код", () -> mnogoInput.sendKeys(MNOGORU_NUMBER, Keys.RETURN));
         step("Проверяем наличие сообщения о применении промокода", () -> {
             wait.until(ExpectedConditions.visibilityOf(mnogoApplied));
-
             Assertions.assertTrue(mnogoApplied.isDisplayed());
         });
     }
 
     public void deleteFromBasket() {
-        String expectedText = "Ваша корзина пуста. Наполните её товарами из нашего интернет-магазина ;)";
         addToBasket();
-        step("Кликаем на очистку корзины", ()-> {
-        wait.until(ExpectedConditions.elementToBeClickable(deleteBasket));
-        deleteBasket.click();
+        step("Кликаем на очистку корзины", () -> {
+            wait.until(ExpectedConditions.elementToBeClickable(deleteBasket));
+            deleteBasket.click();
         });
         wait.until(ExpectedConditions.visibilityOf(basketEmpty));
-        step("Проверяем наличие сообщения о пустой корзине", ()-> {
-        String actualText = basketTitle.getText();
-        Assertions.assertEquals(expectedText, actualText);
+        step("Проверяем наличие сообщения о пустой корзине", () -> {
+            String actualText = basketTitle.getText();
+            Assertions.assertEquals(DELETE_BASKET, actualText);
         });
     }
 
-    public void addInFavorites() {
+    public void addInFavoritesFromBasket() {
         addToBasket();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("td a[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.cssSelector("td a[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/']")));
         addFavorites.click();
         wait.until(ExpectedConditions.elementToBeClickable(count));
         wait.until(ExpectedConditions.textToBePresentInElement(count, "1"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.header li a[href='/personal/favorites/']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.cssSelector("div.header li a[href='/personal/favorites/']")));
         favorites.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a.title[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/?COLOR_GROUP=2309467']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.cssSelector("a.title[href='/goods/zhidkaya_rezina_fiks_pro_3_v_1/?COLOR_GROUP=2309467']")));
         Assertions.assertTrue(checkProduct.isDisplayed());
     }
 
+    public void addInFavorites() {
+        step("Переходим в КТ лота", () -> openUrl(RELATIVE_URL));
+        step("Кликаем на сердечко", () -> favoritesIcon.click());
+        step("Кликаем на таб избранное", () -> {
+            wait.until(ExpectedConditions.elementToBeClickable(favorites));
+            favorites.click();
+        });
+        step("Проверяем наличие добавленного лота в избранном",
+                () -> Assertions.assertTrue(checkProduct.isDisplayed()));
+    }
+
     public void deleteFavorites() {
-        addInFavorites();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn.btn-sm.btn-primary")));
+        addInFavoritesFromBasket();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.cssSelector(".btn.btn-sm.btn-primary")));
         deleteFavoritesElement.click();
         wait.until(ExpectedConditions.elementToBeClickable(checkEmpty));
         Assertions.assertTrue(checkEmpty.isDisplayed());
