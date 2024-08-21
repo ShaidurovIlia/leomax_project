@@ -7,6 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 import selenium.pages.BasePage;
 import selenium.readProperties.ConfigProvider;
 
+import static io.qameta.allure.Allure.step;
+
 public class FeedBackForm extends BasePage {
 
     private static final Faker faker = new Faker();
@@ -37,13 +39,13 @@ public class FeedBackForm extends BasePage {
     }
 
     public void fillingForm() {
-        feedBack.click();
-        name.sendKeys(generateName);
-        email.sendKeys(generatedEmail);
-        list.click();
-        listQuestion.click();
-        comment.sendKeys(generateComment);
-        checkbox.click();
-        send.click();
+        step("Кликаем на форму обратной связи", feedBack::click);
+        step("Заполняем поле name", () -> name.sendKeys(generateName));
+        step("Заполняем поле email", () -> email.sendKeys(generatedEmail));
+        step("Кликаем на блок темы", list::click);
+        step("Выбираем тему обращения", listQuestion::click);
+        step("Заполняем поле комментарий", () -> comment.sendKeys(generateComment));
+        step("Устанавливаем чекбокс в обработке ПД", checkbox::click);
+        step("Кликаем на кнопку отправить", send::click);
     }
 }

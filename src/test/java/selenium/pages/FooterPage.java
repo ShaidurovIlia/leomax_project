@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static io.qameta.allure.Allure.step;
+
 public class FooterPage extends BasePage {
     private static final String WOMEN_CLOTHING_TITLE =
             "Одежда больших размеров для полных женщин купить в Leomax.ru";
@@ -236,16 +238,23 @@ public class FooterPage extends BasePage {
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.END).perform();
 
-        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-        String actualTitle = driver.getTitle();
-        Assertions.assertEquals(actualTitle, expectedTitle);
+        step("Кликаем на нужный раздел странцы", () ->
+                wait.until(ExpectedConditions.elementToBeClickable(element)).click());
+        step("Сравниваем фактический title с ожидаемым", () -> {
+            String actualTitle = driver.getTitle();
+            Assertions.assertEquals(actualTitle, expectedTitle);
+        });
     }
 
     public void clickPartner() {
-        partner.click();
-        Set<String> allTabs = driver.getWindowHandles();
-        List<String> tabsList = new ArrayList<>(allTabs);
-        driver.switchTo().window(tabsList.get(1));
-        partnerWindow.isDisplayed();
+        step("Переходим в раздел Партнерская программа", partner::click);
+        step(" Переходим в новую вкладку", () -> {
+            Set<String> allTabs = driver.getWindowHandles();
+            List<String> tabsList = new ArrayList<>(allTabs);
+            driver.switchTo().window(tabsList.get(1));
+        });
+        step("Проверяем соответсвие описания страницы", () -> {
+            partnerWindow.isDisplayed();
+        });
     }
 }
