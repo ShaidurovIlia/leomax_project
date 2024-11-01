@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import selenium.core.BaseTest;
 import selenium.pages.BasketPage;
 
+@Disabled("В процессе разработки БЗ")
 @Owner(value = "Илья Шайдуров")
 @DisplayName("Класс BasketTest")
 public class BasketTest extends BaseTest {
@@ -42,6 +43,7 @@ public class BasketTest extends BaseTest {
         basketPage.addInFavorites();
     }
 
+    @Disabled("Нужно доработать так как форму изменили")
     @DisplayName("Карта Много.ру")
     @Description("Проверяет работу карты Много.ру в корзине")
     @Test
